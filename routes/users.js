@@ -13,4 +13,5 @@ router.get('/userresg', function(req, res, next) {
   res.render('userregister',{admin:false});
 });
 
+
 module.exports = router;

@@ -6,6 +6,12 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('admin/adminhome',)
 });
+router.get('/addproduct', function(req, res, next) {
+
+  res.render('admin/addproduct')
+});
+
+
 
 
 
