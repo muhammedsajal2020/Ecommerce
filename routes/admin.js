@@ -6,6 +6,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+ 
   res.render('admin/adminhome',)
 });
 router.get('/login', function(req, res, next) {
@@ -14,6 +15,10 @@ router.get('/login', function(req, res, next) {
 router.get('/addproduct', function(req, res, next) {
 
   res.render('admin/add-product')
+});
+router.get('/view-products', function(req, res, next) {
+
+  res.render('admin/view-products')
 });
 router.post('/adminloginbtn', function(req, res, next) {
   console.log('hi')
