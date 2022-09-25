@@ -31,7 +31,7 @@ app.use(fileUpload());
 //database connection
 db.connect((err)=>{
   if(err) console.log('connection error'+err);
-  else console.log('database connected to prot20');
+  else console.log('database connected to prot 27017');
 })
 // app.use('/', indexRouter);
 app.use('/', usersRouter);

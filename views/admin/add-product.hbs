@@ -27,12 +27,24 @@
   </div>
 </div>
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_name">PRODUCT PRICE</label>  
+  <label class="col-md-4 control-label" for="product_price">PRODUCT PRICE</label>  
   <div class="col-md-4">
-  <input id="product_name" name="product_price" placeholder="PRODUCT PRICE" class="form-control input-md" required="" type="text">
+  <input id="product_price" name="product_price" placeholder="PRODUCT PRICE" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Brand_name">Brand Name</label>  
+  <div class="col-md-4">
+  <input id="Brand_name" name="Brand_name" placeholder="BRAND NAME" class="form-control input-md" required="" type="text">
+    
+  </div>
+</div>
+{{!-- CATEGORY --}}
+
+ 
+
+
 
 <!-- Text input-->
 {{!-- <div class="form-group">
@@ -47,8 +59,12 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
   <div class="col-md-4">
-    <select id="product_categorie" name="product_categorie" class="form-control">
-    </select>
+    <select class=" custom-select" id="inputGroupSelect01">
+    <option selected>Choose...</option>
+    <option value="1">Men</option>
+    <option value="2">Women</option>
+    {{!-- <option value="3"></option> --}}
+  </select>
   </div>
 </div>
 
