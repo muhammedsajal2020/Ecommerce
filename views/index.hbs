@@ -87,7 +87,14 @@
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            <a href="/login">Login</a>
+                            
+                            {{#if user}}
+                            {{!-- {{user.name}} --}}
+                            <a href="/logout">Logout</a>
+                            {{else}}
+                           <a href="/login">Login</a>
+                            {{/if}}
+                            
                             {{!-- <a href="#">Register</a> --}}
                         </div>
                         <ul class="header__right__widget">

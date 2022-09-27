@@ -1,12 +1,17 @@
+const { response } = require('express');
 var express = require('express');
-const productHelpers = require('../helpers/product-helpers');
 var router = express.Router();
+const productHelpers = require('../helpers/product-helpers');
+const userHelpers=require('../helpers/user-helpers')
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+  let user=req.session.user
+  console.log(user);
   productHelpers.getAllProducts().then((products)=>{
     console.log(products);
-    res.render('index',{admin:false,products});
+    res.render('index',{products,user});
   })
  
 });
@@ -18,5 +23,29 @@ router.get('/userresg', function(req, res, next) {
   res.render('userregister',{admin:false});
 });
 
+router.post('/signup',(req, res, next)=> {
+userHelpers.doSignup(req.body).then((response)=>{
+  console.log(response);
+  })
+});
+router.post('/login',(req, res, next)=>{
+  console.log("login worked");
 
+  userHelpers.doLogin(req.body).then((response)=>{
+    if(response.status){
+      req.session.loggedIn=true
+      req.session.user=response.user
+      res.redirect('/')
+    }
+    else{
+      res.redirect('/login')
+    }
+
+  })
+
+})
+router.get('/logout',(req,res)=>{
+  req.session.destroy()
+  res.redirect('/')
+})
 module.exports = router;

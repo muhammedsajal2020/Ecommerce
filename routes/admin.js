@@ -7,7 +7,7 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   
-  res.render('admin/adminhome',{products})
+  res.render('admin/adminhome',)
 
 });
 router.get('/login', function(req, res, next) {
