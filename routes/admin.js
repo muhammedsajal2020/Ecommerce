@@ -94,17 +94,17 @@ router.post('/edit-product/:id',uploads.array("image", 3),(req, res)=>{
   console.log('haaaaaaaaaaaai2',req.body);
   productHelpers.updateProduct(req.params.id,req.body).then(()=>{
     res.redirect('/admin/view-products')
-    
+    if(req.files.images){
       const images = [];
   for (i = 0; i < req.files.length; i++) {
     images[i] = req.files[i].filename;
   }
   req.body.images = images
-  adminHelpers.insertProducts(req.body)
+  // adminHelpers.insertProducts(req.body)
 
 
 
-    
+    }
   })
 })
 
