@@ -1,12 +1,9 @@
 var db=require('../config/connection')
 var collection=require('../config/collections')
 module.exports={
-    addProduct:(product,callback)=>{
-        db.get().collection('product').insertOne(product).then((data)=>{
-            console.log("data");
-            console.log(data);
-            callback(data)
-        })
+    addProduct:(productDetails)=>{
+        db.get().collection('product').insertOne(productDetails)
+    
     },
     getAllProducts:()=>{
         return new Promise(async(resolve,reject)=>{
