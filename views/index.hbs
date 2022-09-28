@@ -80,7 +80,7 @@
                                 </ul>
                             </li>
                             <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="/account">Profile</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -99,12 +99,14 @@
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
+                            {{#if user}}
                             <li><a href="#"><span class="icon_heart_alt"></span>
                                 <div class="tip">2</div>
                             </a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
+                            <li><a href="/cart"><span class="icon_bag_alt"></span>
                                 <div class="tip">2</div>
                             </a></li>
+                            {{/if}}
                         </ul>
                     </div>
                 </div>
