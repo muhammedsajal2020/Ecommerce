@@ -44,10 +44,14 @@ router.post('/adminloginbtn', function(req, res, next) {
 });
 
 router.post('/add-product',uploads.array("image", 3),(req,res)=>{
+productHelpers.addProduct(req.body,(id)=>{
+  console.log("uygwehdf",id);
+});
+ 
   console.log(req.files,'add product');
-
+  
 res.render("admin/add-product")
-    
+
 })
 
 
