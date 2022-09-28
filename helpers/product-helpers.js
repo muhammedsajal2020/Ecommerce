@@ -1,5 +1,6 @@
 var db=require('../config/connection')
 var collection=require('../config/collections')
+const { response } = require('../app')
 var objectId=require('mongodb').ObjectId
 module.exports={
     addProduct:(productDetails)=>{
@@ -21,5 +22,31 @@ module.exports={
             })
             
         })
+    },
+    getProductDetails:(proId)=>{
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:objectId(proId)}).then((product)=>{
+                resolve(product)
+            })
+        })
+
+    },
+    updateProduct:(proId,proDetails)=>{
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.PRODUCT_COLLECTION)
+            .updateOne({_id:objectId(proId)},{
+                $set:{
+                    product_id:proDetails.product_id,
+                    product_name:proDetails.product_name,
+                    product_description:proDetails.product_description,
+                    product_price:proDetails.product_price,
+                    Brand_name:proDetails.Brand_name,
+                    available_quantity:proDetails.available_quantity
+                }
+            }).then((response)=>{
+               resolve() 
+            })
+        })
+
     }
 }

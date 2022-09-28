@@ -84,10 +84,29 @@ router.get('/delete-product/:id', (req, res, next)=> {
 
 
 
-router.get('/edit-product', (req, res, next)=> {
+router.get('/edit-product/:id', async (req, res, next)=> {
+  let product=await productHelpers.getProductDetails(req.params.id)
   
-  res.redirect('/admin/view-products')
+console.log(product);
+  res.render('admin/edit-product',{product})
 });
+router.post('/edit-product/:id',uploads.array("image", 3),(req, res)=>{
+  console.log('haaaaaaaaaaaai2',req.body);
+  productHelpers.updateProduct(req.params.id,req.body).then(()=>{
+    res.redirect('/admin/view-products')
+    
+      const images = [];
+  for (i = 0; i < req.files.length; i++) {
+    images[i] = req.files[i].filename;
+  }
+  req.body.images = images
+  adminHelpers.insertProducts(req.body)
+
+
+
+    
+  })
+})
 
 
 

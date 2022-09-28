@@ -1,24 +1,5 @@
 <h1>hello</h1>
-{{!-- <section>
-  <div class="container mt-5">
-    <div class="row">
-       {{#each products}}
-      <div class="col-md-3">
 
-        <div class="card" style="width: 18rem;">
-          <img src="image" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">{{this.product_name}}</h5>
-            <p class="card-text">{{this.product_description}}</p>
-            <a href="#" class="btn btn-primary">Add to cart</a>
-          </div>
-        </div>
-      </div>
-      {{/each}}
-    </div>
-  </div>
-</section> --}}
-<!-- Editable table -->
 <div class="card">
   <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
     Product view
@@ -58,19 +39,10 @@
             <td><img src="/product-images/{{this.images.[0]}}" style="width:50px;height:50px;"></td>
             
             
-            {{!-- <td class="pt-3-half">
-              <span class="table-up"
-                ><a href="#!" class="indigo-text"
-                  ><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a
-              ></span>
-              <span class="table-down"
-                ><a href="#!" class="indigo-text"
-                  ><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a
-              ></span>
-            </td> --}}
+           
             <td>
               <span class="table-remove"
-                ><a href="/admin/edit-product" type="button" class="btn btn-success btn-rounded btn-sm my-0">
+                ><a href="/admin/edit-product/{{this._id}}" type="button" class="btn btn-success btn-rounded btn-sm my-0">
                   Edit
                 </a></span>
               

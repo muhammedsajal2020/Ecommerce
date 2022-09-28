@@ -1,0 +1,100 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<form class="form-horizontal" action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
+<fieldset>
+
+<!-- Form Name -->
+<a href="/admin"><legend >Admin Home</legend></a>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="product_id">PRODUCT ID</label>  
+  <div class="col-md-4">
+  <input id="product_id" value="{{product.product_id}}" name="product_id" placeholder="PRODUCT ID" class="form-control input-md" required="" type="text">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>  
+  <div class="col-md-4">
+  <input id="product_name"  value="{{product.product_name}}" name="product_name" placeholder="PRODUCT NAME" class="form-control input-md" required="" type="text">
+    
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="product_price">PRODUCT PRICE</label>  
+  <div class="col-md-4">
+  <input id="product_price" value="{{product.product_price}}" name="product_price" placeholder="PRODUCT PRICE" class="form-control input-md" required="" type="text">
+    
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Brand_name">Brand Name</label>  
+  <div class="col-md-4">
+  <input id="Brand_name" value="{{product.Brand_name}}" name="Brand_name" placeholder="BRAND NAME" class="form-control input-md" required="" type="text">
+    
+  </div>
+</div>
+{{!-- CATEGORY --}}
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
+  <div class="col-md-4">
+    <select class=" custom-select" id="inputGroupSelect01">
+    <option selected>Choose...</option>
+    <option value="1">Men</option>
+    <option value="2">Women</option>
+    {{!-- <option value="3"></option> --}}
+  </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="available_quantity">AVAILABLE QUANTITY</label>  
+  <div class="col-md-4">
+  <input id="available_quantity" value="{{product.available_quantity}}" name="available_quantity" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="text">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="product_description">PRODUCT DESCRIPTION</label>
+  <div class="col-md-4">                     
+    <input class="form-control" id="product_description"  value="{{product.product_description}}"  name="product_description"></input>
+  </div>
+</div>
+
+<!-- Textarea -->
+
+    
+ <!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="filebutton">main_image</label>
+  <img src="/product-images/{{product.images.[0]}}" alt="" style="width: 50px;height: auto;">
+  <div class="col-md-4">
+    <input id="filebutton" name="image" class="input-file" type="file">
+  </div>
+</div>
+
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+  <div class="col-md-4">
+    <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-primary">Button</button>
+  </div>
+  </div>
+
+</fieldset>
+</form>
