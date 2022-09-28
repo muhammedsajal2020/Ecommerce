@@ -4,6 +4,7 @@ const productHelpers = require('../helpers/product-helpers');
 const adminHelpers = require('../helpers/adminHelpers');
 var router = express.Router();
 const multer = require('multer');
+const { response } = require('../app');
 
 
 const storage = multer.diskStorage({
@@ -70,6 +71,23 @@ router.get('/admin-add-new-user', function(req, res, next) {
   res.render('admin/add-new-user')
 });
 
+router.get('/delete-product/:id', (req, res, next)=> {
+  let proId=req.params.id
+  console.log(proId);
+  productHelpers.deleteProduct(proId).then((response)=>{
+    res.redirect('/admin/view-products')
+  })
+  
+  
+ 
+});
+
+
+
+router.get('/edit-product', (req, res, next)=> {
+  
+  res.redirect('/admin/view-products')
+});
 
 
 
