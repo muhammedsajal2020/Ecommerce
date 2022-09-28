@@ -2,6 +2,19 @@ const e = require('express');
 var express = require('express');
 const productHelpers = require('../helpers/product-helpers');
 var router = express.Router();
+const multer = require('multer');
+
+
+const storage = multer.diskStorage({
+  destination: "public/product-images",
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '--' + file.originalname);
+  },
+});
+
+const uploads = multer({
+  storage
+});
 
 
 /* GET users listing. */
@@ -30,21 +43,11 @@ router.post('/adminloginbtn', function(req, res, next) {
   res.redirect('/admin',)
 });
 
-router.post('/add-product',(req,res)=>{
-  productHelpers.addProduct(req.body,(id)=>{
-    let image=req.files.Image
-    let ids = id.insertedId
-    console.log(image);
-    image.mv('./public/product-images/'+ids+'.jpg',(err,done)=>{
-      if(!err){
-        res.render("admin/add-product")
-      }else{
-        console.log(''+err);
-      }
-      
-    })
-  })
+router.post('/add-product',uploads.array("image", 3),(req,res)=>{
+  console.log(req.files,'add product');
 
+res.render("admin/add-product")
+    
 })
 
 
