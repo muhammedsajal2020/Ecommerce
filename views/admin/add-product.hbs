@@ -60,12 +60,15 @@
 
 <!-- Select Basic -->
 <div class="form-group">
+ 
   <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
   <div class="col-md-4">
     <select class=" custom-select" id="inputGroupSelect01">
     <option selected>Choose...</option>
-    <option value="1">Men</option>
-    <option value="2">Women</option>
+     {{#each categorys}}
+    <option value="1">{{this.category_name}}</option>
+    {{!-- <option value="2">Women</option> --}}
+    {{/each}}
     {{!-- <option value="3"></option> --}}
   </select>
   </div>

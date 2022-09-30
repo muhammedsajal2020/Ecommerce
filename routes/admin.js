@@ -32,13 +32,16 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/addproduct', function(req, res, next) {
+  categoryHelpers.getAllCategory().then((categorys)=>{
 
-  res.render('admin/add-product')
+  res.render('admin/add-product',{categorys})
+  })
 });
 
 router.get('/addcategoty', function(req, res, next) {
-
-  res.render('admin/add-category')
+  categoryHelpers.getAllCategory().then((categorys)=>{
+  res.render('admin/add-category',{categorys})
+  })
 });
 
 router.post('/addcategory', function(req, res, next) {

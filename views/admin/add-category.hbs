@@ -1,4 +1,4 @@
-<div class="container mt-5 mb-5 d-flex justify-content-center">
+<div class="container text-center mt-5 mb-5 d-flex justify-content-center">
     <div class="card px-1 py-4">
         <form action="/admin/addcategory/" method="post">
         <div class="card-body">
@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <div >
-                             <input type="text" name="category" id="form3Example1cg" class="form-control form-control-lg" />
+                             <input type="text" name="category_name" id="form3Example1cg" class="form-control form-control-lg" />
                   <label class="form-label" for="form3Example1cg">category name</label> </div>
                     </div>
                 </div>
@@ -22,4 +22,28 @@
         </div>
         </form>
     </div>
+</div>
+<div class="text-center">
+    
+    <table class="table ">
+  <thead>
+    
+    <tr>
+      <th scope="col">index</th>
+      <th scope="col">Category</th>
+      {{!-- <th scope="col">Last</th>
+      <th scope="col">Handle</th> --}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each categorys}}
+    <tr>
+      <th scope="row">{{@index}}</th>
+      <td>{{this.category_name}}</td>
+      
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
 </div>

@@ -39,6 +39,7 @@ router.post('/signup',(req, res, next)=> {
   req.body.userActived = true;
 userHelpers.doSignup(req.body).then((response)=>{
   console.log(response);
+  res.redirect('userresg',);
   })
 });
 router.post('/login',(req, res, next)=>{
@@ -68,5 +69,11 @@ router.get('/cart',(req,res)=>{
 router.get('/account',verifyLogin,(req,res)=>{
   res.render('user/profile')
 })
+router.get('/addtocart',verifyLogin,(req,res)=>{
+  console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+  res.render('user/add-to-cart')
+})
+
+
 
 module.exports = router;
