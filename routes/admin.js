@@ -36,17 +36,17 @@ router.get('/addproduct', function(req, res, next) {
   res.render('admin/add-product')
 });
 
-router.get('/add-categoty', function(req, res, next) {
+router.get('/addcategoty', function(req, res, next) {
 
   res.render('admin/add-category')
 });
 
-router.post('/new-categoryy', function(req, res, next) {
+router.post('/addcategory', function(req, res, next) {
 
 console.log(req.body);
 categoryHelpers.insertCategory(req.body)
 
-  res.redirect('admin/add-category')
+  res.redirect('/admin/addcategoty')
 });
 
 router.get('/view-products', function(req, res, next) {
