@@ -36,6 +36,7 @@ router.get('/userresg', function(req, res, next) {
 });
 
 router.post('/signup',(req, res, next)=> {
+  req.body.userActived = true;
 userHelpers.doSignup(req.body).then((response)=>{
   console.log(response);
   })

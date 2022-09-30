@@ -5,7 +5,8 @@ const adminHelpers = require('../helpers/adminHelpers');
 var router = express.Router();
 const multer = require('multer');
 const { response } = require('../app');
-
+const userHelpers = require('../helpers/user-helpers');
+const categoryHelpers= require('../helpers/category-helpers');
 
 const storage = multer.diskStorage({
   destination: "public/product-images",
@@ -25,23 +26,38 @@ router.get('/', function(req, res, next) {
   res.render('admin/adminhome',)
 
 });
+
 router.get('/login', function(req, res, next) {
   res.render('admin/adminlogin',)
 });
+
 router.get('/addproduct', function(req, res, next) {
 
   res.render('admin/add-product')
 });
+
+router.get('/add-categoty', function(req, res, next) {
+
+  res.render('admin/add-category')
+});
+
+router.post('/new-categoryy', function(req, res, next) {
+
+console.log(req.body);
+categoryHelpers.insertCategory(req.body)
+
+  res.redirect('admin/add-category')
+});
+
 router.get('/view-products', function(req, res, next) {
   productHelpers.getAllProducts().then((products)=>{
-    console.log(products);
+    
 
   res.render('admin/view-products',{admin:true,products})
   })
 });
 router.post('/adminloginbtn', function(req, res, next) {
-  console.log('hi')
-  console.log(req.body)
+
   res.redirect('/admin',)
 });
 
@@ -52,7 +68,7 @@ router.post('/add-product',uploads.array("image", 3),(req,res)=>{
   }
   req.body.images = images
   adminHelpers.insertProducts(req.body)
-  res.redirect("admin/add-product")
+  res.redirect("/admin/addproduct")
 })
 
 
@@ -60,9 +76,13 @@ router.post('/add-product',uploads.array("image", 3),(req,res)=>{
 
 
 router.get('/userdetails', function(req, res, next) {
-  
+  userHelpers. getAllusers().then((users)=>{
+    console.log(users);
 
-  res.render('admin/user-details')
+  res.render('admin/user-details',{users})
+  })
+
+
 });
 
 router.get('/admin-add-new-user', function(req, res, next) {
@@ -107,12 +127,5 @@ router.post('/edit-product/:id',uploads.array("image", 3),(req, res)=>{
     }
   })
 })
-
-
-
-
-
-
-
 
 module.exports = router;
