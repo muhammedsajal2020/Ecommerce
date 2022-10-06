@@ -11,7 +11,7 @@
             <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Status</th>
+                {{!-- <th>Status</th> --}}
                 <th>Controll</th>
                 {{!-- <th>Start date</th>
                 <th>Salary</th> --}}
@@ -22,8 +22,12 @@
             <tr>
                 <td>{{this.name}}</td>
                 <td>{{this.email}} </td>
-                <td style="color:blue;" class="">Active</td>
-                <td > <button type="button" onclick="return confirm ('are you sure want to Block')" class="btn btn-danger">Block</button> </td>
+                {{!-- <td style="color:blue;" class="">Active</td> --}}
+                <td >{{#if this.userActived}}
+                 <a href="/admin/block_user/{{this._id}}" type="button" onclick="return confirm ('are you sure want to Block')" class="btn btn-danger">Block</a> 
+                     {{else}}
+                <a href="/admin/active_user/{{this._id}}" type="button" onclick="return confirm ('are you sure want to Active')" class="btn btn-success">Active</a></td>
+                {{/if}}
                 {{!-- <td>2011-01-25</td>
                 <td>$112,000</td> --}}
             </tr>

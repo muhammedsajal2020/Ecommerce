@@ -118,6 +118,22 @@ module.exports={
 
 
         })
-    }
+    },
+    blockUser:(userId)=>{
+        return new Promise((resolve, reject)=>{
+            console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+            db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userId)},{$set:{userActived:false}}).then(()=>{
+                resolve()
+            })
+        })
+    },
+    
+    activeUser:(userId)=>{
+        return new Promise((resolve, reject)=>{
+            db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userId)},{$set:{userActived:true}}).then(()=>{
+                resolve()
+        })
+    })
+    },
 }
     

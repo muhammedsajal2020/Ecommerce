@@ -80,7 +80,7 @@ router.post('/add-product',uploads.array("image", 3),(req,res)=>{
 
 router.get('/userdetails', function(req, res, next) {
   userHelpers. getAllusers().then((users)=>{
-    console.log(users);
+    
 
   res.render('admin/user-details',{users})
   })
@@ -89,7 +89,7 @@ router.get('/userdetails', function(req, res, next) {
 });
 
 router.get('/admin-add-new-user', function(req, res, next) {
-  console.log('add new user worked');
+  
 
   res.render('admin/add-new-user')
 });
@@ -110,7 +110,7 @@ router.get('/delete-product/:id', (req, res, next)=> {
 router.get('/edit-product/:id', async (req, res, next)=> {
   let product=await productHelpers.getProductDetails(req.params.id)
   categoryHelpers.getAllCategory().then((categorys)=>{
-console.log(product);
+
   res.render('admin/edit-product',{product,categorys})
   })
 });
@@ -131,5 +131,29 @@ router.post('/edit-product/:id',uploads.array("image", 3),(req, res)=>{
     }
   })
 })
+router.get('/block_user/:id', (req, res, next)=> {
+  try {
+    let userId = req.params.id;
+    userHelpers.blockUser(userId).then((response) => {
+      res.redirect('/admin/userdetails');
+    })
+
+  } catch (error) {
+    res.redirect('/err',{error})
+
+  }
+});
+router.get('/active_user/:id', (req, res, next)=> {
+    try {
+      let userId = req.params.id;
+      userHelpers.activeUser(userId).then((response) => {
+        res.redirect('/admin/userdetails');
+      })
+  
+    } catch (error) {
+      res.redirect('/err',{error})
+  
+    }
+  });
 
 module.exports = router;

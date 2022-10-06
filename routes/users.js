@@ -51,6 +51,7 @@ router.post('/login',(req, res, next)=>{
   console.log("login worked");
 
   userHelpers.doLogin(req.body).then((response)=>{
+   
     if(response.status){
       req.session.loggedIn=true
       req.session.user=response.user
@@ -60,6 +61,7 @@ router.post('/login',(req, res, next)=>{
       req.session.loginErr="invalid user name or password"
       res.redirect('/login')
     }
+ 
 
   })
 
