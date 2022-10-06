@@ -109,9 +109,10 @@ router.get('/delete-product/:id', (req, res, next)=> {
 
 router.get('/edit-product/:id', async (req, res, next)=> {
   let product=await productHelpers.getProductDetails(req.params.id)
-  
+  categoryHelpers.getAllCategory().then((categorys)=>{
 console.log(product);
-  res.render('admin/edit-product',{product})
+  res.render('admin/edit-product',{product,categorys})
+  })
 });
 router.post('/edit-product/:id',uploads.array("image", 3),(req, res)=>{
   console.log('haaaaaaaaaaaai2',req.body);
