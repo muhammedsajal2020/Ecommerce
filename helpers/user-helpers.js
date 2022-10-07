@@ -24,6 +24,7 @@ module.exports={
             let response={}
             let user=await db.get().collection(collection.USER_COLLECTION).findOne({email:userData.email})
             if(user){
+                if(user.userActived){
                 bcrypt.compare(userData.password,user.password).then((status)=>{
                     if(status){
                         console.log("login success");
@@ -36,6 +37,10 @@ module.exports={
                     }
 
                 })
+            }else{
+                console.log('');
+                resolve({status:false})
+            }
 
             }else{
                 console.log('login failed 2');

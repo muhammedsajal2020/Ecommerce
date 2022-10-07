@@ -44,7 +44,7 @@ router.post('/signup',(req, res, next)=> {
   req.body.userActived = true;
 userHelpers.doSignup(req.body).then((response)=>{
   console.log(response);
-  res.redirect('userresg',);
+  res.redirect('login',);
   })
 });
 router.post('/login',(req, res, next)=>{
@@ -61,6 +61,7 @@ router.post('/login',(req, res, next)=>{
       req.session.loginErr="invalid user name or password"
       res.redirect('/login')
     }
+
  
 
   })
