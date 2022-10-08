@@ -96,20 +96,17 @@ module.exports={
                             {
                                 $match:{
                                     $expr:{
-                                        $in:['$_id',"$$prodList"]
-
-                                        
+                                        $in:['$_id',"$$prodList"]                
                                     }
                                 }
                             }
-
                         ],
                         as:'cartItems'
                     }
                 }
             ]).toArray()
-                resolve(cartItems[0].cartItems)
-            
+                resolve(cartItems[0].cartItems)   
+                   
         })
     },
     getCartCount:(userId)=>{
@@ -120,13 +117,10 @@ module.exports={
                 count=cart.products.length
             }
             resolve(count)
-
-
         })
     },
     blockUser:(userId)=>{
         return new Promise((resolve, reject)=>{
-            console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
             db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userId)},{$set:{userActived:false}}).then(()=>{
                 resolve()
             })
@@ -139,6 +133,60 @@ module.exports={
                 resolve()
         })
     })
+    },
+    addToFavourite:(proId,userId)=>{
+        return new Promise(async(resolve, reject) => {
+            let userFav=await db.get().collection(collection.FAVOURITE_COLLECTION).findOne({user:ObjectId(userId)})
+            if(userFav){
+                db.get().collection(collection.FAVOURITE_COLLECTION)
+                .updateOne({user:objectId(userId)},
+                {
+                    
+                        $push:{products:objectId(proId)}
+ 
+
+                }
+                ).then((response)=>{
+                    resolve()
+                })
+
+            }else{
+                let favObj={
+                    user:objectId(userId),
+                    products:[objectId(proId)]
+                }
+                db.get().collection(collection.FAVOURITE_COLLECTION).insertOne(favObj).then((response)=>{
+                    resolve()
+                })
+            }
+        })
+    },
+    getFavProducts:(userId)=>{
+        return new Promise( async(resolve, reject) => {
+            let favItems= await db.get().collection(collection.FAVOURITE_COLLECTION).aggregate([
+                {
+                    $match:{user:objectId(userId)}
+                },
+                {
+                    $lookup:{
+                        from:collection.PRODUCT_COLLECTION,
+                        let:{prodList:'$products'},
+                        pipeline:[
+                            {
+                                $match:{
+                                    $expr:{
+                                        $in:['$_id',"$$prodList"]                
+                                    }
+                                }
+                            }
+                        ],
+                        as:'favItems'
+                    }
+                }
+            ]).toArray()
+                resolve(favItems[0].favItems)   
+                console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv',favItems[0].favItems); 
+        })
     },
 }
     

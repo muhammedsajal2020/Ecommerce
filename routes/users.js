@@ -36,6 +36,7 @@ router.get('/login',(req, res, next)=>{
   res.render('login',{"loginErr":req.session.loginErr});
   req.session.loginErr=false
 });
+
 router.get('/userresg', function(req, res, next) {
   res.render('userregister',{admin:false});
 });
@@ -47,6 +48,7 @@ userHelpers.doSignup(req.body).then((response)=>{
   res.redirect('login',);
   })
 });
+
 router.post('/login',(req, res, next)=>{
   console.log("login worked");
 
@@ -61,12 +63,9 @@ router.post('/login',(req, res, next)=>{
       req.session.loginErr="invalid user name or password"
       res.redirect('/login')
     }
-
- 
-
   })
-
 })
+
 router.get('/logout',(req,res)=>{
   req.session.destroy()
   res.redirect('/')
@@ -75,18 +74,39 @@ router.get('/logout',(req,res)=>{
 router.get('/account',verifyLogin,(req,res)=>{
   res.render('user/profile')
 })
+
 router.get('/cart',verifyLogin,async(req,res)=>{
   let products=await userHelpers. getCartProducts(req.session.user._id)
-  console.log(products);
+  
   res.render('user/add-to-cart',{products,user:req.session.user._id})
 })
+
 router.get('/addtocart/:id',verifyLogin,(req,res)=>{
   userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
     res.redirect('/')
   })
- 
- 
 })
+//m
+
+
+//new
+router.get('/heart_icon',verifyLogin,async(req,res)=>{
+  let products=await userHelpers. getFavProducts(req.session.user._id)
+  
+  res.render('user/favourite',{products,user:req.session.user._id})
+})
+
+
+
+//
+router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
+  
+  userHelpers.addToFavourite(req.params.id,req.session.user._id).then(()=>{
+    res.redirect('/')
+  })
+  })
+
+
 
 
 

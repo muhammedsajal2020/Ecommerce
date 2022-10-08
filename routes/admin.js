@@ -75,9 +75,6 @@ router.post('/add-product',uploads.array("image", 3),(req,res)=>{
 })
 
 
-
-
-
 router.get('/userdetails', function(req, res, next) {
   userHelpers. getAllusers().then((users)=>{
     
