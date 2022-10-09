@@ -23,6 +23,7 @@ const uploads = multer({
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   
+  
   res.render('admin/adminhome',)
 
 });

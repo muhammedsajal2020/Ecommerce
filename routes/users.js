@@ -19,11 +19,11 @@ router.get('/',async function(req, res, next) {
   console.log(user);
   let cartCount=null
   if (req.session.user){
-    cartCount=await userHelpers.getCartCount(req.session._id)
+   cartCount=await userHelpers.getCartCount(req.session.user._id)
   }
    
   productHelpers.getAllProducts().then((products)=>{
-    console.log(products);
+    console.log('cartCount',cartCount);
     res.render('index',{products,user,cartCount});
   })
  
@@ -42,6 +42,7 @@ router.get('/userresg', function(req, res, next) {
 });
 
 router.post('/signup',(req, res, next)=> {
+  
   req.body.userActived = true;
 userHelpers.doSignup(req.body).then((response)=>{
   console.log(response);
