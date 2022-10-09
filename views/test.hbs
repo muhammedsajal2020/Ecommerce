@@ -1,0 +1,133 @@
+<head>
+    <link rel="stylesheet" href="/css/users-style/login.css">
+</head>
+<div class="wrapper">
+        <div class="logo">
+            <img src="/css/users-style/Timeless-logos.jpeg" alt="logo">
+        </div>
+        {{#if msg}}
+        <p>{{msg}}</p>
+        {{/if}}
+        <div class="text-center mt-4 name">
+            Timeless
+        </div>
+        <form class="p-3 mt-3" id="userSignup" action="/signup" method="post">
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="fname" id="fname" placeholder="First Name">
+            </div>
+            <label id="fname-error" class="error" for="fname"></label>
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="lname" id="lname" placeholder="Last Name">
+            </div>
+            <label id="lname-error" class="error" for="lname"></label>
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="email" name="email" id="email" placeholder="Email">
+            </div>
+            <label id="email-error" class="error" for="email"></label>
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="number" name="number" id="number" placeholder="Mobile">
+            </div>
+            <label id="number-error" class="error" for="number"></label>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="password" id="password" placeholder="Password">
+            </div>
+            <label id="password-error" class="error" for="password"></label>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password">
+            </div>
+            <label id="confirmPassword-error" class="error" for="confirmPassword"></label>
+            <button type="submit" class="btn mt-3">Signup</button>
+        </form>
+        <div class="text-center fs-6">
+            <a href="#">Alrady have an account?</a> or <a href="/login">Login</a>
+        </div>
+    </div>
+
+
+{{!-- form validation --}}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+
+
+
+
+<style>
+  .error{
+    color: rgb(242, 9, 9);
+  }
+</style>
+
+<script>
+  jQuery.validator.addMethod("lettersonly", function(value, element) {
+  return this.optional(element) || /^[a-z]+$/i.test(value);
+}, "Letters only please"); 
+
+    $("#userSignup").validate({
+
+
+        rules: {
+            fname: {
+                required: true,
+                minlength: 2,
+                lettersonly:true
+
+            },
+            lname: {
+                required: true,
+                minlength: 2,
+                lettersonly:true
+            },
+
+            email: {
+                required: true,
+                email: true
+            },
+
+            number: {
+                required: true,
+                minlength: 10,
+                maxlength:10
+            },
+
+            password: {
+                required: true,
+                minlength: 6,
+                maxlength: 10
+
+            },
+
+            confirmPassword: {
+                required: true,
+                equalTo: '#password',
+                minlength: 6,
+                maxlength: 10
+            }
+
+
+        },
+        messages: {
+            Password: {
+                required: "the password is required"
+
+            },
+            ConfirmPassword: {
+                equalTo: "enter the same password"
+
+            },
+        }
+    })
+
+
+</script>
+  {{!-- form validation --}}
+
+
+  {{!-- admin style login pager --}}

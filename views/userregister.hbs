@@ -87,12 +87,6 @@
     </header>
     <!-- Header Section End -->
 
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-
 <section class="vh-100 bg-image"
   >
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -103,35 +97,41 @@
             <div class="card-body p-5">
               <h4 class="text-uppercase text-center mb-5">Create a new account</h4>
 
-              <form action="/signup" method="post">
+              <form action="/signup" id="userSignup" method="post">
 
                 <div class="form-outline mb-4">
-                  <label class="form-label " for="form3Example1cg"  >Your Name</label>
-                  <input type="text" name="name"  id="form3Example1cg" class="form-control form-control-lg " required />
+                  <label class="form-label " for="form3Example1cg"  >First Name</label>
+                  <input type="text" name="name"  id="name" class="form-control form-control-lg "  />
                   
                 </div>  
+                <div class="form-outline mb-4">
+                  <label class="form-label " for="form3Example1cg"  >Second Name</label>
+                  <input type="text" name="second_name"  id="second_name" class="form-control form-control-lg "  />
+                  
+                </div> 
 
                 <div class="form-outline mb-4">
                    <label class="form-label" for="form3Example3cg">Your Email</label> 
-                  <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" required/>
+                  <input type="email" name="email" id="email" class="form-control form-control-lg" />
                   
                 </div>
                 <div class="form-outline mb-4">
-                   <label class="form-label" for="form3Example3cg">phone number</label>
-                  <input type="tel" name="phone_number" id="form3Example3cg" class="form-control form-control-lg" required />
+                   <label class="form-label" for="form3Example3cg">Phone Number</label>
+                  <input type="tel" name="phone_number" id="phone_number" class="form-control form-control-lg"  />
                  
                 </div>
 
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form3Example4cg">Password</label>
-                  <input type="password" name="password" id="form3Example4cg" class="form-control form-control-lg" required />
+                  <input type="password" name="password" id="password" class="form-control form-control-lg"  />
                   
                 </div>
 
-                {{!-- <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cdg">Repeat your password</label>
-                </div> --}}
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4cdg">Confirm your password</label>
+                  <input type="password" name="confirmPassword" id="confirmPassword" class="form-control form-control-lg" />
+                  
+                </div>
 
                 {{!-- <div class="form-check d-flex justify-content-center mb-5">
                   <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
@@ -149,9 +149,8 @@
                     class="fw-bold text-body"><u>Login here</u></a></p> --}}
 
               </form>
-              <script>
-                $("#commentForm").validate();
-              </script>
+          
+            
 
             </div>
           </div>
@@ -160,3 +159,80 @@
     </div>
   </div>
 </section>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+
+
+
+
+<style>
+  .error{
+    color: rgb(242, 9, 9);
+  }
+</style>
+
+<script>
+  jQuery.validator.addMethod("lettersonly", function(value, element) {
+  return this.optional(element) || /^[a-z]+$/i.test(value);
+}, "Letters only please"); 
+
+    $("#userSignup").validate({
+
+
+        rules: {
+            name: {
+                required: true,
+                minlength: 2,
+                lettersonly:true
+
+            },
+             second_name: {
+                required: true,
+                minlength: 2,
+                lettersonly:true
+            },
+
+            email: {
+                required: true,
+                email: true
+            },
+
+            phone_number: {
+                required: true,
+                minlength: 10,
+                maxlength:10
+            },
+
+            password: {
+                required: true,
+                minlength: 6,
+                maxlength: 10
+
+            },
+
+            confirmPassword: {
+                required: true,
+                equalTo: '#password',
+                minlength: 6,
+                maxlength: 10
+            }
+
+
+        },
+        messages: {
+            Password: {
+                required: "the password is required"
+
+            },
+            confirm_password: {
+                equalTo: "enter the same password"
+
+            },
+        }
+    })
+
+
+</script>

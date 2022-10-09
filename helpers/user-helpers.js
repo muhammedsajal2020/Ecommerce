@@ -185,7 +185,7 @@ module.exports={
                 }
             ]).toArray()
                 resolve(favItems[0].favItems)   
-                console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv',favItems[0].favItems); 
+               
         })
     },
 }
