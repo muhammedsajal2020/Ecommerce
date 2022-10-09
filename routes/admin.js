@@ -79,7 +79,7 @@ router.get('/userdetails', function(req, res, next) {
   userHelpers. getAllusers().then((users)=>{
     
 
-  res.render('admin/user-details',{users})
+  res.render('admin/user-details',{users,admin:true})
   })
 
 
@@ -88,7 +88,7 @@ router.get('/userdetails', function(req, res, next) {
 router.get('/admin-add-new-user', function(req, res, next) {
   
 
-  res.render('admin/add-new-user')
+  res.render('admin/add-new-user',{admin:true})
 });
 
 router.get('/delete-product/:id', (req, res, next)=> {
@@ -152,5 +152,9 @@ router.get('/active_user/:id', (req, res, next)=> {
   
     }
   });
+  router.get('/grneral_tables',(req,res)=>{
+    console.log('llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll');
+    res.render('admin/tables',{admin:true})
+  })
 
 module.exports = router;

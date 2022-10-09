@@ -99,14 +99,14 @@
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
-                            {{#if user}}
+                         
                             <li><a href="/heart_icon"><span class="icon_heart_alt"></span>
                                 <div class="tip">2</div>
                             </a></li>
                             <li><a href="/cart"><span class="icon_bag_alt"></span>
                                 <div class="tip">{{cartCount}}</div>
                             </a></li>
-                            {{/if}}
+                       
                         </ul>
                     </div>
                 </div>
@@ -207,8 +207,8 @@
                         <div class="label new">New</div>
                         <ul class="product__hover">
                             <li><a src="/product-images/{{this.images.[0]}}" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="/addtofavourite/{{this._id}}"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="/addtocart/{{this._id}}"><span class="icon_bag_alt"></span></a></li>
+                            <li><a href="/addtofavourite/{{this._id}}" onclick="alert('Added to favorate'); // alert('2');"><span class="icon_heart_alt"></span></a></li>
+                            <li><a href="/addtocart/{{this._id}}" onclick="alert('Added to bag'); // alert('2');"><span class="icon_bag_alt"></span></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
