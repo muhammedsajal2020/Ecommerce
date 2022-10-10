@@ -144,11 +144,11 @@
                             <tbody>
                                 {{#each products}}
                                 <tr>
-                                 {{#each product}}
+                                
                                     <td class="cart__product__item">
-                                        <img src="/product-images/{{this.images.[0]}}"  style="width:50px;height:50px;" alt="">
+                                        <img src="/product-images/{{this.product.images.[0]}}"  style="width:50px;height:50px;" alt="">
                                         <div class="cart__product__item__title">
-                                            <h6>{{this.product_name}}</h6>
+                                            <h6>{{this.product.product_name}}</h6>
                                             <div class="rating">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -158,11 +158,14 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="cart__price">{{this.product_price}}</td>
-                                    {{/each}}
-                                    <td class="cart__quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="{{this.quantity}}">
+                                    <td class="cart__price">{{this.product.product_price}}</td>
+                                
+                                    <td class="cart__quantity"  >
+                                        <div class="pro-qty" > 
+                                            <button class="cart-item-count" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
+                                            <input type="text"  value="" >{{this.quantity}}
+                                            
+                                            <button class="cart-item-count " onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button>
                                         </div>
                                   
                                     </td>
@@ -353,6 +356,25 @@
         </div>
     </div>
     <!-- Search End -->
+    <script>
+        function changeQuantity(cartId,proId,count){
+         count =parseInt(count)
+         
+            $.ajax({
+                url:'/change-product-quantity',
+                data:{
+                    cart:cartId,
+                    product:proId,
+                    count:count,
+                    
+                },
+                method:'post',
+                success:(response)=>{
+                    alert(response)
+                }
+            })
+        }
+    </script>
 
     <!-- Js Plugins -->
     <script src="user/js/jquery-3.3.1.min.js"></script>

@@ -125,22 +125,12 @@ module.exports={
                         as:'product'
                     }
                 },
-                // {
-                //     $lookup:{
-                //         from:collection.PRODUCT_COLLECTION,
-                //         let:{prodList:'$products'},
-                //         pipeline:[
-                //             {
-                //                 $match:{
-                //                     $expr:{
-                //                         $in:['$_id',"$$prodList"]                
-                //                     }
-                //                 }
-                //             }
-                //         ],
-                //         as:'cartItems'
-                //     }
-                // }
+                {
+                    $project:{
+                        item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
+                    }
+                }
+            
             ]).toArray()
             console.log(cartItems);
                 resolve(cartItems)   
@@ -222,9 +212,24 @@ module.exports={
                     }
                 }
             ]).toArray()
-                resolve(favItems[0].favItems)   
+                resolve(favItems)   
                
         })
     },
+    changeProductQuantity:(details)=>{
+        details.count=parseInt(details.count)
+        
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.CART_COLLECTION)
+            .updateOne({_id:objectId(details.cart), 'products.item':objectId(details.product)},
+            {
+                $inc:{'products.$.quantity':details.count}
+            }
+            ).then(()=>{
+                resolve()
+
+            })
+        })
+    }
 }
     

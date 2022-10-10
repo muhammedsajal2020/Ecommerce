@@ -108,6 +108,12 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
     res.redirect('/')
   })
   })
+  router.post('/change-product-quantity',(req,res,next)=>{
+    console.log('lllllllllllllllllllllllllllllllllllllllllllllll',req.body);
+    userHelpers.changeProductQuantity(req.body).then(()=>{
+
+    })
+  })
 
 
 
