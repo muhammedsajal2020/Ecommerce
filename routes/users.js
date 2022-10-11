@@ -121,7 +121,15 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
   })
   router.get('/place-order',verifyLogin, async(req,res)=>{
     let total=await userHelpers.getTotalAmount(req.session.user._id)
-    res.render('user/checkout',{total})
+    res.render('user/checkout',{total,user:req.session.user})
+  })
+  router.post('/place-order',async(req,res)=>{
+    let products=await userHelpers.getCartProductList(req.body.userId)
+    let totalPrice=await userHelpers.getTotalAmount(req.body.userId)
+    userHelpers.placeOrder(req.body,products).then((response)=>{
+     res.json({status:true})
+    })
+    console.log(req.body);
   })
 
 

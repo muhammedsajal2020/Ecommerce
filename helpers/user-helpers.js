@@ -281,13 +281,54 @@ getTotalAmount:(userId)=>{
                 }
             }
             //
-           
+        //     if(total.length==0){
+        //         resolve(total)
+        //   }else{
+        //       resolve(total[0].total)
+        //   }
             //
         
         ]).toArray()
-        console.log(total[0].total);
-            resolve(total[0].total)   
-               
+
+        if(total.length==0){
+                   resolve(total)
+             }else{
+               resolve(total[0].total)
+             }
+    })
+},
+placeOrder:(order,products,total)=>{
+    return new Promise((resolve, reject) => {
+        console.log(order,products,total);
+        let status=order.cod==='on'?'placed':'pending'
+        let orderObj={
+            deliveryDetails:{
+                phone:order.phone,
+                address:order.address,
+                post_code:order.post_code
+            },
+            userId:objectId(order.userId),
+            PaymentMethod:order.cod,
+            products:products,
+            totalAmount:total,
+            status:status,
+            date:new Date()
+        }
+        db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
+            db.get().collection(collection.CART_COLLECTION).deleteOne({user:objectId(order.userId)})
+            resolve()
+        })
+    })
+
+
+},
+getCartProductList:(userId)=>{
+    return new Promise(async(resolve, reject) => {
+        console.log(userId);
+        let cart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
+        console.log(cart);
+        resolve(cart.products)
+        
     })
 }
 
