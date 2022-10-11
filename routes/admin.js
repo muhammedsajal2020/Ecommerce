@@ -66,6 +66,7 @@ router.post('/adminloginbtn', function(req, res, next) {
 });
 
 router.post('/add-product',uploads.array("image", 3),(req,res)=>{
+  
   const images = [];
   for (i = 0; i < req.files.length; i++) {
     images[i] = req.files[i].filename;
