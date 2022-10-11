@@ -210,7 +210,7 @@
                             <li><a src="/product-images/{{this.images.[0]}}" class="image-popup"><span class="arrow_expand"></span></a></li>
                             <li><a href="/addtofavourite/{{this._id}}" onclick="alert('Added to favorate'); // alert('2');"><span class="icon_heart_alt"></span></a></li>
                             {{!-- <li><a href="/addtocart/{{this._id}}" ><span class="icon_bag_alt"></span></a></li> --}}
-                             <li><a onclick="addToCart('{{this._id}}')" ><span class="icon_bag_alt"></span></a></li>
+                             <li><a  onclick="addToCart('{{this._id}}')"   ><span class="icon_bag_alt"  ></span></a></li>
                             {{!-- <button onclick="addToCart('{{this._id}}')" class="btn btn-primary"> Add to cart</button> --}}
                         </ul>
                     </div>
@@ -674,6 +674,7 @@
 <script src="user/js/owl.carousel.min.js"></script>
 <script src="user/js/jquery.nicescroll.min.js"></script>
 <script src="user/js/main.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

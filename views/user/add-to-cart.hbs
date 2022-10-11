@@ -93,12 +93,14 @@
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
+                         
                             <li><a href="/heart_icon"><span class="icon_heart_alt"></span>
-                                <div class="tip">6</div>
+                                <div class="tip">2</div>
                             </a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                <div class="tip">3</div>
+                            <li><a href="/cart"><span class="icon_bag_alt" id="cart-count" >{{cartCount}}</span>
+                                <div class="tip" id="cart-count">{{cartCount}}</div>
                             </a></li>
+                       
                         </ul>
                     </div>
                 </div>
@@ -161,9 +163,10 @@
                                     <td class="cart__price">{{this.product.product_price}}</td>
                                 
                                     <td class="cart__quantity"  >
-                                        <div class="pro-qty" > 
+                                        <div class="" > 
                                             <button class="cart-item-count" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
-                                            <input type="text"  value="" >{{this.quantity}}
+                                            {{!-- <input type="text"  value="" >{{this.quantity}} --}}
+                                            <span id="{{this.product._id}}">{{this.quantity}} </span>
                                             
                                             <button class="cart-item-count " onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button>
                                         </div>
@@ -358,6 +361,7 @@
     <!-- Search End -->
     <script>
         function changeQuantity(cartId,proId,count){
+            let quantity=parseInt(document.getElementById(proId).innerHTML)
          count =parseInt(count)
          
             $.ajax({
@@ -366,11 +370,18 @@
                     cart:cartId,
                     product:proId,
                     count:count,
+                    quantity:quantity
                     
                 },
                 method:'post',
                 success:(response)=>{
-                    alert(response)
+                    if(response.removeProduct){
+                        alert("Product Removed From Cart ")
+                        location.reload()
+                    }else{
+                        document.getElementById(proId).innerHTML=quantity+count
+                    }
+                   
                 }
             })
         }
