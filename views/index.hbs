@@ -103,8 +103,10 @@
                             <li><a href="/heart_icon"><span class="icon_heart_alt"></span>
                                 <div class="tip">2</div>
                             </a></li>
-                            <li><a href="/cart"><span class="icon_bag_alt" id="cart-count" >{{cartCount}}</span>
+                            <li><a href="/cart"><span class="icon_bag_alt" id="cart-count" ></span>
+                            {{#if user}}
                                 <div class="tip" id="cart-count">{{cartCount}}</div>
+                                 {{/if}}
                             </a></li>
                        
                         </ul>
@@ -207,8 +209,10 @@
                     <div class="product__item__pic set-bg" data-setbg="/product-images/{{this.images.[0]}}">
                         <div class="label new">New</div>
                         <ul class="product__hover">
-                            <li><a src="/product-images/{{this.images.[0]}}" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="/addtofavourite/{{this._id}}" onclick="alert('Added to favorate'); // alert('2');"><span class="icon_heart_alt"></span></a></li>
+                            <li><a href="/product-details/{{this._id}}"  >
+                            <span class="arrow_expand"></span></a></li>
+                            <li><a href="/addtofavourite/{{this._id}}" onclick="alert('Added to favorate'); // alert('2');">
+                            <span class="icon_heart_alt"></span></a></li>
                             {{!-- <li><a href="/addtocart/{{this._id}}" ><span class="icon_bag_alt"></span></a></li> --}}
                              <li><a  onclick="addToCart('{{this._id}}')"   ><span class="icon_bag_alt"  ></span></a></li>
                             {{!-- <button onclick="addToCart('{{this._id}}')" class="btn btn-primary"> Add to cart</button> --}}

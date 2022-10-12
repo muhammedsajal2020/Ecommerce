@@ -131,6 +131,30 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
     })
     console.log(req.body);
   })
+  router.get('/order-success',verifyLogin,(req,res)=>{
+    
+    res.render('user/order-success',{user:req.session.user})
+  })
+  router.get('/orders',verifyLogin, async(req,res)=>{
+    let orders= await userHelpers.getUserOrders(req.session.user._id)
+    
+    res.render('user/orders',{user:req.session.user,orders})
+  })
+  router.get('/view-order-products/:id',verifyLogin, async(req,res)=>{
+    let products= await userHelpers.getOrderProducts(req.params._id)
+    
+    res.render('user/view-order-products',{user:req.session.user,products})
+  })
+  
+  router.get('/product-details/:id', async(req,res)=>{
+  
+    let product=await productHelpers.getProductDetails(req.params.id)
+  
+
+    res.render('user/product-details',{product})
+  })
+  
+ 
 
 
 

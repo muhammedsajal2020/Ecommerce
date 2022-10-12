@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ashion | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link  href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+
+
+
+    <link rel="stylesheet" href="user/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="user/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="user/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="user/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="user/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="user/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="user/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="user/css/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__close">+</div>
+        <ul class="offcanvas__widget">
+            <li><span class="icon_search search-switch"></span></li>
+            <li><a href="#"><span class="icon_heart_alt"></span>
+                <div class="tip">2</div>
+            </a></li>
+            <li><a href="#"><span class="icon_bag_alt"></span>
+                <div class="tip">2</div>
+            </a></li>
+        </ul>
+        <div class="offcanvas__logo">
+            <a href="./"><img src="user/img/logo.png" alt=""></a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__auth">
+            <a href="">Login</a>
+            <a href="#">Register</a>
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-3 col-lg-2">
+                    <div class="header__logo">
+                        <a href="./"><img src="user/img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-7">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="active"><a href="./index.html">Home</a></li>
+                            <li><a href="#">Women’s</a></li>
+                            <li><a href="#">Men’s</a></li>
+                            <li><a href="./shop.html">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="./product-details.html">Product Details</a></li>
+                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
+                                    <li><a href="./checkout.html">Checkout</a></li>
+                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__right">
+                        <div class="header__right__auth">
+                            <a href="/logout">Logout</a>
+                            {{!-- <a href="#">Register</a> --}}
+                        </div>
+                        <ul class="header__right__widget">
+                            <li><span class="icon_search search-switch"></span></li>
+                         
+                            <li><a href="/heart_icon"><span class="icon_heart_alt"></span>
+                                <div class="tip">2</div>
+                            </a></li>
+                            <li><a href="/cart"><span class="icon_bag_alt" id="cart-count" >{{cartCount}}</span>
+                                <div class="tip" id="cart-count">{{cartCount}}</div>
+                            </a></li>
+                       
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+    
+
+
+
+
+
+<div class="container">
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Date</th>
+                <th>Qty</th>
+                <th>Phone</th>
+                <th>Post code</th>
+                <th>Address</th>
+                <th>Products</th>
+                <th>status</th>
+                <th>Vieew Products</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each orders}}
+            <tr>
+                <td>{{@index}}</td>
+                <td>{{this.date}}</td>
+                <td> {{this.products.quantity}}</td>
+                <td>{{this.deliveryDetails.phone}}</td>
+                <td>{{this.deliveryDetails.post_code}}</td>
+                <td>{{this.deliveryDetails.address}}</td>
+                <td> <img src="/product-images/{{this.product.images.[0]}}"  style="width:50px;height:50px;" alt=""></td>
+                <td>{{this.status}}</td>
+                <td> <a href="/view-order-products/{{this._id}}" class="btn btn-primary"> view Products</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+        
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+    $('#example').DataTable();
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+
+  
+<!-- Js Plugins -->
+    <script src="user/js/jquery-3.3.1.min.js"></script>
+    <script src="user/js/bootstrap.min.js"></script>
+    <script src="user/js/jquery.magnific-popup.min.js"></script>
+    <script src="user/js/jquery-ui.min.js"></script>
+    <script src="user/js/mixitup.min.js"></script>
+    <script src="user/js/jquery.countdown.min.js"></script>
+    <script src="user/js/jquery.slicknav.js"></script>
+    <script src="user/js/owl.carousel.min.js"></script>
+    <script src="user/js/jquery.nicescroll.min.js"></script>
+    <script src="user/js/main.js"></script>
+</body>
+
+</html>

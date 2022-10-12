@@ -17,7 +17,13 @@ var db=require('./config/connection')
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-app.engine('hbs',hbs.engine({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/layout/',partialsDir  : [
+app.engine('hbs',hbs.engine({extname:'hbs',defaultLayout:'layout',
+helpers:{
+  inc:(value,option)=>{
+    return parseInt(value)+1;
+  }
+},
+layoutsDir:__dirname+'/views/layout/',partialsDir  : [
   //  path to your partials
   path.join(__dirname, 'views/partials'),
 ]}))
