@@ -72,9 +72,11 @@ router.get('/logout',(req,res)=>{
   res.redirect('/')
 })
 
-router.get('/account',verifyLogin,(req,res)=>{
-  res.render('user/profile')
+router.get('/account',verifyLogin,async(req,res)=>{
+  let user=await userHelpers.getOneuserDetails(req.session.user._id)
+  res.render('user/profile',{user})
 })
+
 
 router.get('/cart',verifyLogin,async(req,res)=>{
   
@@ -92,19 +94,12 @@ router.get('/addtocart/:id',(req,res)=>{
     res.json({status:true});
   })
 })
-//m
-
-
-//new
 router.get('/heart_icon',verifyLogin,async(req,res)=>{
   let products=await userHelpers. getFavProducts(req.session.user._id)
   
   res.render('user/favourite',{products,user:req.session.user._id})
 })
 
-
-
-//
 router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
   
   userHelpers.addToFavourite(req.params.id,req.session.user._id).then(()=>{
@@ -153,6 +148,7 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
 
     res.render('user/product-details',{product})
   })
+  
   
  
 

@@ -163,27 +163,46 @@ module.exports={
     })
     },
     addToFavourite:(proId,userId)=>{
+
+        let proObj={
+            item:objectId(proId),
+            quantity:1,
+        }
         return new Promise(async(resolve, reject) => {
-            let userFav=await db.get().collection(collection.FAVOURITE_COLLECTION).findOne({user:ObjectId(userId)})
-            if(userFav){
-                db.get().collection(collection.FAVOURITE_COLLECTION)
+            let userCart=await db.get().collection(collection.FAVOURITE_COLLECTION).findOne({user:ObjectId(userId)})
+            if(userCart){
+                let proExit=userCart.products.findIndex(product=> product.item==proId)
+                console.log('proExit',proExit);
+                if(proExit !=-1){
+                    db.get().collection(collection.FAVOURITE_COLLECTION)
+                    .updateOne({user:objectId(userId), 'products.item':objectId(proId)},
+                    {
+                        $inc:{'products.$.quantity':1}
+                    }
+                    ).then(()=>{
+                        resolve()
+
+                    })
+
+                }else{
+                 db.get().collection(collection.FAVOURITE_COLLECTION)
                 .updateOne({user:objectId(userId)},
                 {
                     
-                        $push:{products:objectId(proId)}
+                        $push:{products:proObj}
  
 
                 }
                 ).then((response)=>{
                     resolve()
                 })
-
-            }else{
-                let favObj={
-                    user:objectId(userId),
-                    products:[objectId(proId)]
                 }
-                db.get().collection(collection.FAVOURITE_COLLECTION).insertOne(favObj).then((response)=>{
+            }else{
+                let FavObj={
+                    user:objectId(userId),
+                    products:[proObj]
+                }
+                db.get().collection(collection.FAVOURITE_COLLECTION).insertOne(FavObj).then((response)=>{
                     resolve()
                 })
             }
@@ -191,29 +210,38 @@ module.exports={
     },
     getFavProducts:(userId)=>{
         return new Promise( async(resolve, reject) => {
-            let favItems= await db.get().collection(collection.FAVOURITE_COLLECTION).aggregate([
+            
+            let FavItems= await db.get().collection(collection.FAVOURITE_COLLECTION).aggregate([
                 {
                     $match:{user:objectId(userId)}
                 },
                 {
+                    $unwind:'$products'
+                },
+                {
+                    $project:{
+                        item:'$products.item',
+                        quantity:'$products.quantity',
+                    }
+                },
+                 {
                     $lookup:{
                         from:collection.PRODUCT_COLLECTION,
-                        let:{prodList:'$products'},
-                        pipeline:[
-                            {
-                                $match:{
-                                    $expr:{
-                                        $in:['$_id',"$$prodList"]                
-                                    }
-                                }
-                            }
-                        ],
-                        as:'favItems'
+                        localField:'item',
+                        foreignField:'_id',
+                        as:'product'
+                    }
+                },
+                {
+                    $project:{
+                        item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
                     }
                 }
+            
             ]).toArray()
-                resolve(favItems)   
-               
+            console.log(FavItems);
+                resolve(FavItems)   
+                   
         })
     },
     changeProductQuantity:(details)=>{
@@ -375,6 +403,21 @@ getOrderProducts:(orderId)=>{
     })
 
 },
+getOneuserDetails:(userId)=>{
+    return new Promise(async(resolve,reject)=>{
+        db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(userId)}).then((user)=>{
+            resolve(user)
+        })     
+    })
+},
+// getSingleProductData:(proId)=>{
+//     return new Promise((resolve, reject) => {
+//         db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:objectId(proId)}).then((product)=>{
+//             resolve(product)
+//         })
+//     })
+
+// }
 
 
 }
