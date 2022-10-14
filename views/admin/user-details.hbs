@@ -1,4 +1,4 @@
-
+{{!-- 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
@@ -35,16 +35,53 @@
             {{/each}}
         </tbody>
        
-    </table>
+    </table> --}}
 
 
 
 
 
 
-<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
-<script type="text/javascript">
-$(document).ready(function () {
-    $('#example').DataTable();
-});
+
+
+{{!--  --}}
+<div class="container mt-auto p-5" style="" >
+    <div class="row justify-content-md-center">
+           <div class="col col-lg-8">
+        
+<table id="table_userdetails" class="display">
+    <thead>
+        
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Controll</th>
+        </tr>
+    </thead>
+    <tbody>
+         {{#each users}}
+        <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.email}}</td>
+             <td>{{this.phone_number}}</td>
+             <td>{{#if this.userActived}}
+                 <a href="/admin/block_user/{{this._id}}" type="button" onclick="return confirm ('are you sure want to Block')" class="btn btn-danger">Block</a> 
+                     {{else}}
+                <a href="/admin/active_user/{{this._id}}" type="button" onclick="return confirm ('are you sure want to Active')" class="btn btn-success">UnBlock</a>
+                </td>
+                {{/if}}
+                
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+
+<script>
+$(document).ready( function () {
+    $('#table_userdetails').DataTable();
+} );
 </script>

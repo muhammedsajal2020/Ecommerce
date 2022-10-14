@@ -6,7 +6,7 @@ const userHelpers=require('../helpers/user-helpers');
 const { route } = require('./admin');
 
 const verifyLogin=(req,res,next)=>{
-  if(req.session.loggedIn){
+  if(req.session.userLoggedIn){
     next()
   }else{
     res.redirect('/login')
@@ -31,11 +31,11 @@ router.get('/',async function(req, res, next) {
 });
 
 router.get('/login',(req, res, next)=>{
-  if(req.session.loggedIn){
+  if(req.session.user){
     res.redirect('/')
   }else
-  res.render('login',{"loginErr":req.session.loginErr});
-  req.session.loginErr=false
+  res.render('login',{"LoginErr":req.session.userLoginErr});
+  req.session.userLoginErr=false
 });
 
 router.get('/userresg', function(req, res, next) {
@@ -46,6 +46,8 @@ router.post('/signup',(req, res, next)=> {
   
   req.body.userActived = true;
 userHelpers.doSignup(req.body).then((response)=>{
+  req.session.user=response
+  req.session.userLoggedIn=true
   console.log(response);
   res.redirect('login',);
   })
@@ -57,19 +59,21 @@ router.post('/login',(req, res, next)=>{
   userHelpers.doLogin(req.body).then((response)=>{
    
     if(response.status){
-      req.session.loggedIn=true
+      
       req.session.user=response.user
+      req.session.userLoggedIn=true
       res.redirect('/')
     }
     else{
-      req.session.loginErr="invalid user name or password"
+      req.session.userLoginErr="invalid user name or password"
       res.redirect('/login')
     }
   })
 })
 
 router.get('/logout',(req,res)=>{
-  req.session.destroy()
+  req.session.user=null
+  req.session.userLoggedIn=false
   res.redirect('/')
 })
 
@@ -170,11 +174,5 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
     })
 
   })
-  
- 
-
-
-
-
 
 module.exports = router;

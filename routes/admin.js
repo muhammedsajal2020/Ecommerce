@@ -158,5 +158,11 @@ router.get('/active_user/:id', (req, res, next)=> {
     console.log('llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll');
     res.render('admin/tables',{admin:true})
   })
+  router.get('/orders',(req,res)=>{
+    res.render('admin/orders',{admin:true})
+  })
+  router.get('/css-test',(req,res)=>{
+res.render('admin/css-test')
+  })
 
 module.exports = router;
