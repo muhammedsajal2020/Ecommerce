@@ -432,9 +432,8 @@
   "image": "https://example.com/your_logo",
   "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
   "handler": function (response){
-      alert(response.razorpay_payment_id);
-      alert(response.razorpay_order_id);
-      alert(response.razorpay_signature);
+
+      
       varifyPayment(response,order)
   },
   "prefill": {
@@ -459,7 +458,15 @@ var rzp1 = new Razorpay(options);
                         payment,
                         order
                     },
-                    method:'post'
+                    method:'post',
+                    success:(response)=>{
+                        if(response.status){
+                            location.href='/order-success'
+                        }else{
+                            alert("order failed")
+                        }
+
+                    }
                 })
             }
         </script>
