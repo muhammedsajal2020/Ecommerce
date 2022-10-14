@@ -4,6 +4,11 @@ const bcrypt=require('bcrypt')
 var objectId=require('mongodb').ObjectId
 const { ObjectId } = require('mongodb')
 const { response } = require('../app')
+const Razorpay = require('razorpay');
+var instance = new Razorpay({
+    key_id: 'rzp_test_mClNRE8FWEq5Jp',
+    key_secret: 'Ll7EcfrmETS6DQeeRNOtdkjF',
+  });
 
 module.exports={
     doSignup: (userData) => {
@@ -344,7 +349,7 @@ placeOrder:(order,products,total)=>{
         }
         db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
             db.get().collection(collection.CART_COLLECTION).deleteOne({user:objectId(order.userId)})
-            resolve()
+            resolve(response.insertedId)
         })
     })
 
@@ -410,16 +415,27 @@ getOneuserDetails:(userId)=>{
         })     
     })
 },
-// getSingleProductData:(proId)=>{
-//     return new Promise((resolve, reject) => {
-//         db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:objectId(proId)}).then((product)=>{
-//             resolve(product)
-//         })
-//     })
-
-// }
-
+generateRazorpay:(orderId,total)=>{
+    return new Promise((resolve, reject) => {
+        var options={
+            amount:total*100,
+                currency:"INR",
+                receipt:""+orderId
+        };
+        instance.orders.create(options,function(err,order){
+            if(err){
+                console.log(err);
+            }else{
+            console.log("new order :",order);
+            resolve(order);
+        }
+        });
+        
+    })
+}
 
 }
+//
+
 
     
