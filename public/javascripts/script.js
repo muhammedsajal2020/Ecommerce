@@ -8,6 +8,7 @@
                     let count=$('#cart-count').html()
                     count=parseInt(count)+1
                     $("cart-count").html(count)
+                    Swal.fire("Added to cart");
 
                 }
                 

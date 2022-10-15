@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FRAGRANCE STORE</title>
-
+   
+ 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
@@ -23,6 +24,7 @@
     <link rel="stylesheet" href="user/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="user/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="user/css/style.css" type="text/css">
+ 
 </head>
 
 <body>
@@ -215,12 +217,12 @@
                             <li><a href="/addtofavourite/{{this._id}}" onclick="alert('Added to favorate'); // alert('2');">
                             <span class="icon_heart_alt"></span></a></li>
                             {{!-- <li><a href="/addtocart/{{this._id}}" ><span class="icon_bag_alt"></span></a></li> --}}
-                             <li><a  onclick="addToCart('{{this._id}}')"   ><span class="icon_bag_alt"  ></span></a></li>
+                             <li><a    onclick="addToCart('{{this._id}}')"   ><span class="icon_bag_alt"  ></span></a></li>
                             {{!-- <button onclick="addToCart('{{this._id}}')" class="btn btn-primary"> Add to cart</button> --}}
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a href="#">{{this.product_name}}</a></h6>
+                        <h6><a href="">{{this.product_name}}</a></h6>
                         <div class="rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -666,8 +668,8 @@
     </div>
 </div>
 <!-- Search End -->
-
-
+     
+  
 <!-- Js Plugins -->
 <script src="user/js/jquery-3.3.1.min.js"></script>
 <script src="user/js/bootstrap.min.js"></script>
