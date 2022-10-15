@@ -7,6 +7,15 @@ const multer = require('multer');
 const { response } = require('../app');
 const userHelpers = require('../helpers/user-helpers');
 const categoryHelpers= require('../helpers/category-helpers');
+const ADMINMAIL='admin@gmail.com';
+const ADMINPASSWORD='admin123';
+const verifyLogin=(req,res,next)=>{
+  if(req.session.adminLoggedIn){
+    next()
+  }else{
+    res.redirect('admin/adminlogin')
+  }
+}
 
 const storage = multer.diskStorage({
   destination: "public/product-images",
@@ -21,15 +30,30 @@ const uploads = multer({
 
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  
-  
-  res.render('admin/adminhome',)
-
+router.get('/',function(req, res, next) {
+  if(verifyLogin){
+    res.render('admin/adminlogin')
+  }else{
+   
+    res.render('admin/adminhome',)
+  }
 });
+router.get('/adminlogin',(req,res)=>{
+  res.render('admin/adminlogin')
+})
 
-router.get('/login', function(req, res, next) {
-  res.render('admin/adminlogin',)
+router.post('/adminlogin', function(req, res, next) {
+  
+  if(req.body.email== ADMINMAIL && req.body.password== ADMINPASSWORD){
+    console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+    res.render('admin/adminhome',)
+  }else{
+    wrongpassword="invalid user name or password"
+    console.log('admin err');
+    res.redirect('/admin/adminlogin')
+  }
+
+ 
 });
 
 router.get('/addproduct', function(req, res, next) {

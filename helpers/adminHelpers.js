@@ -8,5 +8,10 @@ module.exports={
         return new Promise((resolve, reject) => {
             db.get().collection(collections.PRODUCT_COLLECTION).insertOne(productDetails)
         })
-    }  
+    },
+    adminAcLogin:(admindata)=>{
+        return new Promise((resolve, reject) => {
+            
+        })
+    } 
 }
