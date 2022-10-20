@@ -95,10 +95,12 @@
                             <li><span class="icon_search search-switch"></span></li>
                          
                             <li><a href="/heart_icon"><span class="icon_heart_alt"></span>
-                                <div class="tip">2</div>
+                                <div class=""></div>
                             </a></li>
-                            <li><a href="/cart"><span class="icon_bag_alt" id="cart-count" >{{cartCount}}</span>
+                            <li><a href="/cart"><span class="icon_bag_alt" id="cart-count" ></span>
+                            {{#if user}}
                                 <div class="tip" id="cart-count">{{cartCount}}</div>
+                                 {{/if}}
                             </a></li>
                        
                         </ul>
@@ -139,7 +141,7 @@
                                     <th>Product</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
-                                    <th>Total</th>
+                                    {{!-- <th>Total</th> --}}
                                     <th></th>
                                 </tr>
                             </thead>
@@ -172,7 +174,7 @@
                                         </div>
                                   
                                     </td>
-                                    <td class="cart__total">$ 300.0</td>
+                                    {{!-- <td class="cart__total">$ 300.0</td> --}}
                                     <td class="cart__close"><span class="icon_close"></span></td>
                                 </tr>
                                 {{/each}}
@@ -209,7 +211,7 @@
                     <div class="cart__total__procced">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Subtotal <span>$ 750.0</span></li>
+                            {{!-- <li>Subtotal <span>$ 750.0</span></li> --}}
                             <li>Total <span id="total">{{total}}</span></li>
                         </ul>
                         <a href="/place-order" class="primary-btn">Proceed to checkout</a>

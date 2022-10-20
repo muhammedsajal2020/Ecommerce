@@ -86,10 +86,11 @@ router.get('/account',verifyLogin,async(req,res)=>{
 router.get('/cart',verifyLogin,async(req,res)=>{
   let products=await userHelpers. getCartProducts(req.session.user._id)
   let total=0
+  cartCount=await userHelpers.getCartCount(req.session.user._id)
   if(products.length>0){
     total=await userHelpers.getTotalAmount(req.session.user._id)
   } 
-  res.render('user/add-to-cart',{products,user:req.session.user._id,total})
+  res.render('user/add-to-cart',{products,user:req.session.user._id,total,cartCount})
 })
 
 

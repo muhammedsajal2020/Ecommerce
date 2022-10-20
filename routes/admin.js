@@ -45,11 +45,10 @@ router.get('/adminlogin',(req,res)=>{
 router.post('/adminlogin', function(req, res, next) {
   
   if(req.body.email== ADMINMAIL && req.body.password== ADMINPASSWORD){
-    console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+    
     res.render('admin/adminhome',)
   }else{
     wrongpassword="invalid user name or password"
-    console.log('admin err');
     res.redirect('/admin/adminlogin')
   }
 
@@ -183,7 +182,9 @@ router.get('/active_user/:id', (req, res, next)=> {
     res.render('admin/tables',{admin:true})
   })
   router.get('/orders',(req,res)=>{
-    res.render('admin/orders',{admin:true})
+    adminHelpers.getAllorders().then((orders)=>{
+    res.render('admin/orders',{admin:true,orders})
+    })
   })
   router.get('/css-test',(req,res)=>{
 res.render('admin/css-test')

@@ -4,26 +4,36 @@
         
 <table id="table_id" class="display">
     <thead>
+        
         <tr>
-            <th>Column 1</th>
-            <th>Column 2</th>
-            <th>Column 2</th>
-            <th>Column 2</th>
+            <th>UserId</th>
+            <th>Date</th>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Total amount</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Pin code</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
+        {{#each orders}}
         <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-             <td>Row 1 Data 2</td>
-             <td>Row 1 Data 2</td>
+            <td>{{this.userId}}</td>
+            <td>{{this.date}}</td>
+            <td>{{this.products.0.item}}</td>
+            <td>{{this.products.0.quantity}}</td>
+            <td>{{this.totalAmount}}</td>
+            <td>{{this.deliveryDetails.phone}}</td>
+            <td>{{this.deliveryDetails.address}}</td>
+            <td>{{this.deliveryDetails.post_code}}</td>
+            <td>{{this.status}}</td>
+             {{!-- <td>Row 1 Data 2</td>
+             <td>Row 1 Data 2</td> --}}
         </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-            <td>Row 2 Data 2</td>
-            <td>sajal</td>
-        </tr>
+        {{/each}}
+        
     </tbody>
 </table>
 </div>
