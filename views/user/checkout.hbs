@@ -142,7 +142,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input" >
                                     <p>First Name <span>*</span></p>
-                                    <input type="text" name="first_name">
+                                    <input type="text" name="first_name" required>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -152,60 +152,60 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="checkout__form__input">
+                                {{!-- <div class="checkout__form__input">
                                     <p>Country <span>*</span></p>
                                     <input type="text" name="country">
-                                </div>
+                                </div> --}}
                                 <div class="checkout__form__input">
                                     <p>Address <span>*</span></p>
-                                    <input type="text" placeholder="Street Address">
-                                    <input type="text" name="address" placeholder="Apartment. suite, unite ect ( optinal )">
+                                    <input type="text"name="address" placeholder="Street Address" required>
+                                    
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Town/City <span>*</span></p>
-                                    <input type="text" name="town_or_city">
+                                    <input type="text" name="town_or_city" required>
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>State <span>*</span></p>
-                                    <input type="text" name="state">
+                                    <input type="text" name="state" required>
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Postcode/Zip <span>*</span></p>
-                                    <input type="text" name="post_code">
+                                    <input type="text" name="post_code" required>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>Phone <span>*</span></p>
-                                    <input type="text" name="phone">
+                                    <input type="text" name="phone" required>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>Email <span>*</span></p>
-                                    <input type="text" name="email">
+                                    <input type="text" name="email" required>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="checkout__form__checkbox">
-                                    <label for="acc">
+                                    {{!-- <label for="acc">
                                         Create an acount?
                                         <input type="checkbox" id="acc">
                                         <span class="checkmark"></span>
                                     </label>
                                     <p>Create am acount by entering the information below. If you are a returing
-                                        customer login at the <br />top of the page</p>
+                                        customer login at the <br />top of the page</p> --}}
                                     </div>
                                     <div class="checkout__form__input">
-                                        <p>Account Password <span>*</span></p>
-                                        <input type="text">
+                                        {{!-- <p>Account Password <span>*</span></p>
+                                        <input type="text"> --}}
                                     </div>
                                     <div class="checkout__form__checkbox">
-                                        <label for="note">
+                                        {{!-- <label for="note">
                                             Note about your order, e.g, special noe for delivery
                                             <input type="checkbox" id="note">
                                             <span class="checkmark"></span>
-                                        </label>
+                                        </label> --}}
                                     </div>
                                     <div class="checkout__form__input">
                                         <p>Oder notes <span>*</span></p>
@@ -232,29 +232,40 @@
                                 </div>
                                 <div class="checkout__order__total">
                                     <ul>
-                                        <li>Subtotal <span>$ 750.0</span></li>
+                                        {{!-- <li>Subtotal <span>$ 750.0</span></li> --}}
                                         <li>Total <span>{{total}}</span></li>
                                     </ul>
                                 </div>
                                 <div class="checkout__order__widget">
-                                    <label for="o-acc">
+                                    {{!-- <label for="o-acc">
                                         Create an acount?
                                         <input type="checkbox" id="o-acc">
                                         <span class="checkmark"></span>
                                     </label>
                                     <p>Create am acount by entering the information below. If you are a returing customer
-                                    login at the top of the page.</p>
-                                    <label for="check-payment">
-                                        Onlice payment
-                                        <input type="checkbox" id="check-payment" name="online_payment">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label for="paypal">
-                                        COD
-                                        <input type="checkbox" id="paypal" name="cod">
-                                        <span class="checkmark"></span>
-                                    </label>
+                                    login at the top of the page.</p> --}}
+                                      <fieldset id="paymentmethod">
+                
                                 </div>
+                                        <fieldset id="paymentmethod">
+                                            <label class="container p-0">
+                                                <label class="container">Cash on delivery
+                                                    <input type="radio" name="paymentmethod" value="COD">
+                                                    <span class="check"></span>
+                                                </label>
+                                                {{!-- <label class="container">Pay with Debit/Credit/ATM Cards
+                                                    <input type="radio" name="paymentmethod" value="CARD">
+                                                    <span class="check"></span>
+                                                </label> --}}
+                                                {{!-- <label class="container">Net Banking
+                                                    <input type="radio" name="paymentmethod" value="Razorpay">
+                                                    <span class="check"></span>
+                                                </label> --}}
+                                                <label class="container">Online payment
+                                                    <input type="radio" name="paymentmethod" value="Razorpay">
+                                                    <span class="check"></span>
+                                                </label>
+                                        </fieldset>
                                 <input type="text" name="userId" id="" value="{{user._id}}" hidden>
                                 <button type="submit" class="site-btn">Place oder</button>
                             </div>

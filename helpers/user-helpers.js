@@ -333,7 +333,11 @@ getTotalAmount:(userId)=>{
 placeOrder:(order,products,total)=>{
     return new Promise((resolve, reject) => {
         console.log(order,products,total);
-        let status=order.cod==='on'?'placed':'pending'
+        // let status=order.cod==='on'?'placed':'pending'
+        const status =
+                order.paymentMethod === "COD"
+                    ? "placed"
+                    : "Pending";
         let orderObj={
             deliveryDetails:{
                 phone:order.phone,

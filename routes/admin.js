@@ -7,6 +7,7 @@ const multer = require('multer');
 const { response } = require('../app');
 const userHelpers = require('../helpers/user-helpers');
 const categoryHelpers= require('../helpers/category-helpers');
+const couponHelpers= require('../helpers/coupon-helpers');
 const ADMINMAIL='admin@gmail.com';
 const ADMINPASSWORD='admin123';
 const verifyLogin=(req,res,next)=>{
@@ -27,6 +28,7 @@ const storage = multer.diskStorage({
 const uploads = multer({
   storage
 });
+
 
 
 /* GET users listing. */
@@ -54,6 +56,9 @@ router.post('/adminlogin', function(req, res, next) {
 
  
 });
+
+
+
 
 router.get('/addproduct', function(req, res, next) {
   categoryHelpers.getAllCategory().then((categorys)=>{
@@ -178,7 +183,7 @@ router.get('/active_user/:id', (req, res, next)=> {
     }
   });
   router.get('/grneral_tables',(req,res)=>{
-    console.log('llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll');
+    
     res.render('admin/tables',{admin:true})
   })
   router.get('/orders',(req,res)=>{
@@ -189,5 +194,40 @@ router.get('/active_user/:id', (req, res, next)=> {
   router.get('/css-test',(req,res)=>{
 res.render('admin/css-test')
   })
+
+  router.get('/addcoupon',(req,res)=>{
+   
+    res.render('admin/add-coupon',{admin:true})
+  })
+  router.post('/add-coupon', (req, res,next) => {
+    
+    try {
+      couponHelpers.addCoupon(req.body,(id) =>{
+        
+        res.redirect('/admin/addcoupon')
+      }) 
+      
+    } catch (error) {
+      next(error)
+    }
+   
+     });
+
+  //error
+router.use(function(req, res, next) {
+  // next(createError(404));
+  res.render('admin/err404admin')
+});
+
+// error handler
+router.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 module.exports = router;
