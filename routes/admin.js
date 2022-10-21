@@ -47,8 +47,8 @@ router.get('/adminlogin',(req,res)=>{
 router.post('/adminlogin', function(req, res, next) {
   
   if(req.body.email== ADMINMAIL && req.body.password== ADMINPASSWORD){
-    
-    res.render('admin/adminhome',)
+    req.session.adminLoggedIn=true
+    res.render('admin/adminhome')
   }else{
     wrongpassword="invalid user name or password"
     res.redirect('/admin/adminlogin')
@@ -60,20 +60,20 @@ router.post('/adminlogin', function(req, res, next) {
 
 
 
-router.get('/addproduct', function(req, res, next) {
+router.get('/addproduct',verifyLogin,function(req, res, next) {
   categoryHelpers.getAllCategory().then((categorys)=>{
 
   res.render('admin/add-product',{categorys})
   })
 });
 
-router.get('/addcategoty', function(req, res, next) {
+router.get('/addcategoty',verifyLogin, function(req, res, next) {
   categoryHelpers.getAllCategory().then((categorys)=>{
   res.render('admin/add-category',{categorys})
   })
 });
 
-router.post('/addcategory', function(req, res, next) {
+router.post('/addcategory',verifyLogin, function(req, res, next) {
 
 console.log(req.body);
 categoryHelpers.insertCategory(req.body)
@@ -81,19 +81,19 @@ categoryHelpers.insertCategory(req.body)
   res.redirect('/admin/addcategoty')
 });
 
-router.get('/view-products', function(req, res, next) {
+router.get('/view-products', verifyLogin, function(req, res, next) {
   productHelpers.getAllProducts().then((products)=>{
     
 
   res.render('admin/view-products',{admin:true,products})
   })
 });
-router.post('/adminloginbtn', function(req, res, next) {
+router.post('/adminloginbtn',verifyLogin, function(req, res, next) {
 
   res.redirect('/admin',)
 });
 
-router.post('/add-product',uploads.array("image", 3),(req,res)=>{
+router.post('/add-product' , verifyLogin,uploads.array("image", 3),(req,res)=>{
   
   const images = [];
   for (i = 0; i < req.files.length; i++) {
@@ -105,7 +105,7 @@ router.post('/add-product',uploads.array("image", 3),(req,res)=>{
 })
 
 
-router.get('/userdetails', function(req, res, next) {
+router.get('/userdetails', verifyLogin, function(req, res, next) {
   userHelpers. getAllusers().then((users)=>{
     
 
@@ -115,13 +115,13 @@ router.get('/userdetails', function(req, res, next) {
 
 });
 
-router.get('/admin-add-new-user', function(req, res, next) {
+router.get('/admin-add-new-user', verifyLogin, function(req, res, next) {
   
 
   res.render('admin/add-new-user',{admin:true})
 });
 
-router.get('/delete-product/:id', (req, res, next)=> {
+router.get('/delete-product/:id', verifyLogin, (req, res, next)=> {
   let proId=req.params.id
   console.log(proId);
   productHelpers.deleteProduct(proId).then((response)=>{
@@ -134,14 +134,14 @@ router.get('/delete-product/:id', (req, res, next)=> {
 
 
 
-router.get('/edit-product/:id', async (req, res, next)=> {
+router.get('/edit-product/:id',verifyLogin, async (req, res, next)=> {
   let product=await productHelpers.getProductDetails(req.params.id)
   categoryHelpers.getAllCategory().then((categorys)=>{
 
   res.render('admin/edit-product',{product,categorys})
   })
 });
-router.post('/edit-product/:id',uploads.array("image", 3),(req, res)=>{
+router.post('/edit-product/:id',verifyLogin,uploads.array("image", 3),(req, res)=>{
   console.log('haaaaaaaaaaaai2',req.body);
   productHelpers.updateProduct(req.params.id,req.body).then(()=>{
     res.redirect('/admin/view-products')
@@ -158,7 +158,7 @@ router.post('/edit-product/:id',uploads.array("image", 3),(req, res)=>{
     }
   })
 })
-router.get('/block_user/:id', (req, res, next)=> {
+router.get('/block_user/:id', verifyLogin, (req, res, next)=> {
   try {
     let userId = req.params.id;
     userHelpers.blockUser(userId).then((response) => {
@@ -170,7 +170,7 @@ router.get('/block_user/:id', (req, res, next)=> {
 
   }
 });
-router.get('/active_user/:id', (req, res, next)=> {
+router.get('/active_user/:id',verifyLogin, (req, res, next)=> {
     try {
       let userId = req.params.id;
       userHelpers.activeUser(userId).then((response) => {
@@ -182,16 +182,16 @@ router.get('/active_user/:id', (req, res, next)=> {
   
     }
   });
-  router.get('/grneral_tables',(req,res)=>{
+  router.get('/grneral_tables', verifyLogin,(req,res)=>{
     
     res.render('admin/tables',{admin:true})
   })
-  router.get('/orders',(req,res)=>{
+  router.get('/orders', verifyLogin,(req,res)=>{
     adminHelpers.getAllorders().then((orders)=>{
     res.render('admin/orders',{admin:true,orders})
     })
   })
-  router.get('/css-test',(req,res)=>{
+  router.get('/css-test', verifyLogin,(req,res)=>{
 res.render('admin/css-test')
   })
 

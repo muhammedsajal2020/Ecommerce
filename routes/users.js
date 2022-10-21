@@ -94,7 +94,7 @@ router.get('/cart',verifyLogin,async(req,res)=>{
 })
 
 
-router.get('/addtocart/:id',(req,res)=>{
+router.get('/addtocart/:id' ,verifyLogin,(req,res)=>{
 
   userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
     // res.redirect('/')
@@ -113,7 +113,7 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
     res.redirect('/')
   })
   })
-  router.post('/change-product-quantity',(req,res,next)=>{
+  router.post('/change-product-quantity',verifyLogin,(req,res,next)=>{
     
     userHelpers.changeProductQuantity(req.body).then( async(response)=>{
      response.total=await userHelpers.getTotalAmount(req.body.user)
@@ -125,7 +125,7 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
     let total=await userHelpers.getTotalAmount(req.session.user._id)
     res.render('user/checkout',{total,user:req.session.user})
   })
-  router.post('/place-order',async(req,res)=>{
+  router.post('/place-order',verifyLogin,async(req,res)=>{
     console.log('jjjjjjjjjjjjjjjjjjjjjjj',req.body);
     let products=await userHelpers.getCartProductList(req.body.userId)
     let totalPrice=await userHelpers.getTotalAmount(req.body.userId)
@@ -156,14 +156,14 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
     res.render('user/view-order-products',{user:req.session.user,products})
   })
   
-  router.get('/product-details/:id', async(req,res)=>{
+  router.get('/product-details/:id', verifyLogin, async(req,res)=>{
   
     let product=await productHelpers.getProductDetails(req.params.id)
   
 
     res.render('user/product-details',{product})
   })
-  router.post('/verify-payment',(req,res)=>{
+  router.post('/verify-payment', verifyLogin,(req,res)=>{
     console.log(req.body);
     userHelpers.verifyPayment(req.body).then(()=>{
       userHelpers.changePaymentStatus(req.body['order[receipt]']).then(()=>{

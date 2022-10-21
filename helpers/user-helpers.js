@@ -313,13 +313,6 @@ getTotalAmount:(userId)=>{
                     total:{$sum:{$multiply:['$quantity',{$toInt:'$product.product_price'}]}}
                 }
             }
-            //
-        //     if(total.length==0){
-        //         resolve(total)
-        //   }else{
-        //       resolve(total[0].total)
-        //   }
-            //
         
         ]).toArray()
 
