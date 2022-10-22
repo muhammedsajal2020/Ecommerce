@@ -133,13 +133,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shop__cart__table">
-                        <table>
+                        <table class="table" id="myDiv">
                             <thead>
                                 <tr>
                                     <th>Product</th>
                                     <th>Price</th>
                                     <th>view </th>
-                                    {{!-- <th>Total</th> --}}
+                                    <th>Delete</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -172,8 +172,8 @@
                                         </div>
                                   
                                     </td> --}}
-                                    <td class="cart__total"><a href="/product-details/{{this.product._id}}" class="btn btn-primary">View Details</a></td>
-                                    {{!-- <td class="cart__close"><span class="icon_close"></span></td> --}}
+                                    <td class="cart__total"><a href="/product-details/{{this.product._id}}" class="btn btn-primary">Details</a></td>
+                                    <td class=""><span class=""><a class="btn btn-danger" onclick="deleteProduct('{{this._id}}','{{this.products._id}}')">Delete</a></span></td>
                                 </tr>
                                 {{/each}}
                              
@@ -183,39 +183,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="cart__btn">
-                        <a href="#">Continue Shopping</a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="cart__btn update__btn">
-                        <a href="#"><span class="icon_loading"></span> Update cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="discount__content">
-                        <h6>Discount codes</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your coupon code">
-                            <button type="submit" class="site-btn">Apply</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-4 offset-lg-2">
-                    <div class="cart__total__procced">
-                        <h6>Cart total</h6>
-                        <ul>
-                            <li>Subtotal <span>$ 750.0</span></li>
-                            <li>Total <span id="total">{{total}}</span></li>
-                        </ul>
-                        <a href="/place-order" class="primary-btn">Proceed to checkout</a>
-                    </div>
-                </div>
-            </div>
+            
+            
         </div>
     </section>
     <!-- Shop Cart Section End -->
@@ -362,6 +331,28 @@
         </div>
     </div>
     <!-- Search End -->
+    <script>
+        function deleteProduct(wishId,proId){
+            console.log(proId,"ifshfskfksjfsfu")
+            $.ajax({
+                url:'/delete-wish/'+wishId+'/'+proId,
+                method:'get',
+                success:(response)=>{
+                    if(response.deleteProduct){
+                        //alert('Do you want to remove the product')
+                        Swal.fire(
+  'Product removed!',
+  'You clicked the button!',
+  'success'
+)
+                        //location.reload()
+                        $("#myDiv").load(location.href + " #myDiv");
+                         $("#wish-count").load(location.href+" #wish-count");
+                    }
+                }
+            })
+         }
+    </script>
 
     <!-- Js Plugins -->
     <script src="user/js/jquery-3.3.1.min.js"></script>

@@ -100,13 +100,16 @@
                             
                             {{!-- <a href="#">Register</a> --}}
                         </div>
+                          {{#if user}}
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
                          
                             <li><a href="/heart_icon"><span class="icon_heart_alt"></span>
                                 <div class=""></div>
                             </a></li>
-                            <li><a href="/cart"><span class="icon_bag_alt" id="cart-count" ></span>
+                            <li><a href="/cart"><span class="icon_bag_alt" id="cart-count" >  
+                            </span>
+                            {{/if}}
                             {{#if user}}
                                 <div class="tip" id="cart-count">{{cartCount}}</div>
                                  {{/if}}

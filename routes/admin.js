@@ -195,11 +195,11 @@ router.get('/active_user/:id',verifyLogin, (req, res, next)=> {
 res.render('admin/css-test')
   })
 
-  router.get('/addcoupon',(req,res)=>{
+  router.get('/addcoupon',verifyLogin,(req,res)=>{
    
     res.render('admin/add-coupon',{admin:true})
   })
-  router.post('/add-coupon', (req, res,next) => {
+  router.post('/add-coupon',verifyLogin, (req, res,next) => {
     
     try {
       couponHelpers.addCoupon(req.body,(id) =>{
@@ -212,6 +212,15 @@ res.render('admin/css-test')
     }
    
      });
+     router.get('/coupon-manage',verifyLogin,(req,res)=>{
+      try{
+        couponHelpers.getAllCoupon().then((coupons)=>{
+        res.render('admin/coupon-manage',{admin:true,coupons})
+        })
+      }catch (err){
+        next(err)
+      }
+    })
 
   //error
 router.use(function(req, res, next) {

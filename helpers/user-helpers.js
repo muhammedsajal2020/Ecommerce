@@ -456,7 +456,25 @@ changePaymentStatus:(orderId)=>{
         })
     })
 
-}
+},
+deleteWish:(wishId,proId)=>{
+    return new Promise((resolve,reject)=>{
+    try {
+       
+            db.get().collection(collection.FAVOURITE_COLLECTION).updateOne({_id:objectid(wishId)},
+            {
+                $pull:{products:{item:objectid(proId)}}
+            }
+            ).then((response)=>{
+                resolve({deleteProduct:true})
+            })
+       
+    } catch (error) {
+        reject(error)
+    }
+})
+},
+
 
 }
 //

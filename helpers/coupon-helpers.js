@@ -16,4 +16,17 @@ module.exports = {
       reject(error)
     }
   },
+  getAllCoupon: () => {
+    return new Promise(async (resolve, reject) => {
+    try {
+     
+        let coupons = await db.get().collection(collection.COUPON_COLLECTION).find().toArray();
+        resolve(coupons)
+     
+    } catch (error) {
+      reject(error)
+    }
+  })
+  },
+  
 }

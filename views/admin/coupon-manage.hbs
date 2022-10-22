@@ -1,0 +1,35 @@
+<div class="container mt-auto p-5" style="" >
+    <div class="row justify-content-md-center">
+           <div class="col col-lg-8">
+        
+<table id="table_coupon" class="display">
+    <thead>
+        
+        <tr>
+            <th>Coupon</th>
+            <th>Discount</th>
+            <th>Date</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each coupons}}
+        <tr>
+            <td>{{this.coupon}}</td>
+            <td>{{this.discount}}</td>
+             <td>{{this.date}}</td>
+             <td><a class="btn btn-danger" href="">Remove</a></td>      
+        </tr>
+        {{/each}}
+     
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+
+<script>
+$(document).ready( function () {
+    $('#table_coupon').DataTable();
+} );
+</script>

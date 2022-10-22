@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers');
 const userHelpers=require('../helpers/user-helpers');
+const couponHelpers= require('../helpers/coupon-helpers');
 const { route } = require('./admin');
 
 const verifyLogin=(req,res,next)=>{
@@ -17,14 +18,14 @@ const verifyLogin=(req,res,next)=>{
 /* GET users listing. */
 router.get('/',async function(req, res, next) {
   let user=req.session.user
-  console.log(user);
+  
   let cartCount=null
   if (req.session.user){
    cartCount=await userHelpers.getCartCount(req.session.user._id)
   }
    
   productHelpers.getAllProducts().then((products)=>{
-    console.log('cartCount',cartCount);
+    
     res.render('index',{products,user,cartCount});
   })
  
@@ -48,13 +49,13 @@ router.post('/signup',(req, res, next)=> {
 userHelpers.doSignup(req.body).then((response)=>{
   req.session.user=response
   req.session.userLoggedIn=true
-  console.log(response);
+ 
   res.redirect('login',);
   })
 });
 
 router.post('/login',(req, res, next)=>{
-  console.log("login worked");
+  
 
   userHelpers.doLogin(req.body).then((response)=>{
    
@@ -84,14 +85,25 @@ router.get('/account',verifyLogin,async(req,res)=>{
 
 
 router.get('/cart',verifyLogin,async(req,res)=>{
+  
   let products=await userHelpers. getCartProducts(req.session.user._id)
   let total=0
   cartCount=await userHelpers.getCartCount(req.session.user._id)
   if(products.length>0){
     total=await userHelpers.getTotalAmount(req.session.user._id)
   } 
-  res.render('user/add-to-cart',{products,user:req.session.user._id,total,cartCount})
+  try{
+    couponHelpers.getAllCoupon().then((coupons)=>{
+      res.render('user/add-to-cart',{products,user:req.session.user._id,total,cartCount,coupons})
+    })
+  }catch (err){
+    next(err)
+  }
 })
+//
+
+//
+
 
 
 router.get('/addtocart/:id' ,verifyLogin,(req,res)=>{
@@ -126,7 +138,7 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
     res.render('user/checkout',{total,user:req.session.user})
   })
   router.post('/place-order',verifyLogin,async(req,res)=>{
-    console.log('jjjjjjjjjjjjjjjjjjjjjjj',req.body);
+    
     let products=await userHelpers.getCartProductList(req.body.userId)
     let totalPrice=await userHelpers.getTotalAmount(req.body.userId)
     userHelpers.placeOrder(req.body,products,totalPrice).then((orderId)=>{
@@ -139,7 +151,7 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
       }
      
     })
-    console.log(req.body);
+    
   })
   router.get('/order-success',verifyLogin,(req,res)=>{
     
@@ -176,5 +188,18 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
     })
 
   })
+  router.get("/delete-wish/:wishId/:proId", (req, res, next) => {
+    try {
+      wishId = req.params.wishId;
+      proId = req.params.proId;
+  
+      userHelpers.deleteWish(wishId, proId).then((response) => {
+        res.json(response);
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+  
 
 module.exports = router;
