@@ -179,7 +179,7 @@
                                     <input type="text" value="1">
                                 </div>
                             </div> --}}
-                            <a  onclick="addToCart('{{this._id}}')" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                           <a class="btn btn-danger"  onclick="addToCart('{{this._id}}')" >Add to cart</a>
                             {{!-- <ul>
                                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
@@ -384,6 +384,24 @@
         </div>
     </div>
     <!-- Search End -->
+    <script>
+          function addToCart(proId){
+        $.ajax({
+            url:'/addtocart/'+proId,
+            method:'get',
+            success:(response)=>{
+                if(response.status){
+                    let count=$('#cart-count').html()
+                    count=parseInt(count)+1
+                    $("cart-count").html(count)
+                    Swal.fire("Added to cart");
+
+                }
+                
+            }
+        })
+    }
+    </script>
 
     <!-- Js Plugins -->
     <script src="/user/js/jquery-3.3.1.min.js"></script>

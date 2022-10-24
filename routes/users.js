@@ -168,7 +168,7 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
     res.render('user/view-order-products',{user:req.session.user,products})
   })
   
-  router.get('/product-details/:id', verifyLogin, async(req,res)=>{
+  router.get('/product-details/:id',  async(req,res)=>{
   
     let product=await productHelpers.getProductDetails(req.params.id)
   
@@ -188,18 +188,42 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
     })
 
   })
-  router.get("/delete-wish/:wishId/:proId", (req, res, next) => {
+  router.post("/delete-wish", (req, res, next) => {
+    console.log('jjjjjjjjjjjjj',req.body);
     try {
-      wishId = req.params.wishId;
-      proId = req.params.proId;
+      pid = req.body.pid;
+      id = req.body._id;
+     
+      
   
-      userHelpers.deleteWish(wishId, proId).then((response) => {
+      userHelpers.deleteWish(id,pid).then((response) => {
         res.json(response);
       });
     } catch (error) {
       next(error);
     }
   });
+
+  //   deleteProduct: (req, res, next) => {
+  //   try {
+  //     console.log(req.body);
+
+  //     cartHelpers.deleteProduct(req.body).then((resposne) => {
+  //       console.log(resposne, "kooooi")
+
+  //       res.json({ response })
+
+
+
+  //     })
+
+  //   } catch (error) {
+
+  //     next(error)
+
+  //   }
+
+  // }
   
 
 module.exports = router;

@@ -217,11 +217,13 @@
                         <ul class="product__hover">
                             <li><a href="/product-details/{{this._id}}"  >
                             <span class="arrow_expand"></span></a></li>
+                        
                             <li><a href="/addtofavourite/{{this._id}}" onclick="alert('Added to favorate'); // alert('2');">
                             <span class="icon_heart_alt"></span></a></li>
                             {{!-- <li><a href="/addtocart/{{this._id}}" ><span class="icon_bag_alt"></span></a></li> --}}
                              <li><a    onclick="addToCart('{{this._id}}')"   ><span class="icon_bag_alt"  ></span></a></li>
                             {{!-- <button onclick="addToCart('{{this._id}}')" class="btn btn-primary"> Add to cart</button> --}}
+                            
                         </ul>
                     </div>
                     <div class="product__item__text">

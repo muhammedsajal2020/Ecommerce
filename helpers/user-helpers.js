@@ -5,6 +5,7 @@ var objectId=require('mongodb').ObjectId
 const { ObjectId } = require('mongodb')
 const { response } = require('../app')
 const Razorpay = require('razorpay');
+const { log } = require('console')
 var instance = new Razorpay({
     key_id: 'rzp_test_mClNRE8FWEq5Jp',
     key_secret: 'Ll7EcfrmETS6DQeeRNOtdkjF',
@@ -457,13 +458,14 @@ changePaymentStatus:(orderId)=>{
     })
 
 },
-deleteWish:(wishId,proId)=>{
+deleteWish:(id,pid)=>{
+    console.log(id,pid,'mmmmmmmmmmmmmmmmmmmmmmm');
     return new Promise((resolve,reject)=>{
     try {
        
-            db.get().collection(collection.FAVOURITE_COLLECTION).updateOne({_id:objectid(wishId)},
+            db.get().collection(collection.FAVOURITE_COLLECTION).updateOne({_id:objectId(id)},
             {
-                $pull:{products:{item:objectid(proId)}}
+                $pull:{products:{item:objectId(pid)}}
             }
             ).then((response)=>{
                 resolve({deleteProduct:true})
@@ -478,6 +480,33 @@ deleteWish:(wishId,proId)=>{
 
 }
 //
+// deleteProduct: (proDetails) => {
+//     return new Promise((resolve, reject) => {
+//     try {
+        
+//             db.get().collection('cart').updateOne({ _id: objectId(proDetails.cart) },
+//                 {
+//                     $pull: { product: { item: objectId(proDetails.product) } }
+//                 }
+//             ).then((respsone) => {
+
+//                 resolve({ removePro: true })
+
+//             }).catch(function () {
+
+//                 console.log('Some error has occurred');
+
+//             })
+
+       
+        
+//     } catch (error) {
+//         reject(error)
+//     }
+  
+// })
+
+// }
 
 
     

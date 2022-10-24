@@ -173,7 +173,7 @@
                                   
                                     </td> --}}
                                     <td class="cart__total"><a href="/product-details/{{this.product._id}}" class="btn btn-primary">Details</a></td>
-                                    <td class=""><span class=""><a class="btn btn-danger" onclick="deleteProduct('{{this._id}}','{{this.products._id}}')">Delete</a></span></td>
+                                    <td class=""><span class=""><a class="btn btn-danger" data-id="{{this._id}}" data-pid="{{this.product._id}}" onclick="deleteProduct(this)">Delete</a></span></td>
                                 </tr>
                                 {{/each}}
                              
@@ -332,11 +332,22 @@
     </div>
     <!-- Search End -->
     <script>
-        function deleteProduct(wishId,proId){
-            console.log(proId,"ifshfskfksjfsfu")
+        function deleteProduct(value){
+            var id = $(value).data('id');
+            var pid = $(value).data('pid');
+            console.log(id,pid,"ifshfskfksjfsfu")
             $.ajax({
-                url:'/delete-wish/'+wishId+'/'+proId,
-                method:'get',
+                url:'/delete-wish',
+                data: {
+                    _id: id,
+                    pid: pid,
+
+       
+        
+        
+      },
+       
+                method:'post',
                 success:(response)=>{
                     if(response.deleteProduct){
                         //alert('Do you want to remove the product')
@@ -368,3 +379,10 @@
 </body>
 
 </html>
+
+
+         {{!-- data: {
+        favourites: wishId,
+        products: proId,
+        
+      } --}}
