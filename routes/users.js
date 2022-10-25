@@ -203,6 +203,22 @@ router.get('/addtofavourite/:id',verifyLogin,(req,res)=>{
       next(error);
     }
   });
+  
+  router.post("/delete-cart", (req, res, next) => {
+    console.log('cccccccccccccc',req.body);
+    try {
+      pid = req.body.pid;
+      id = req.body._id;
+     
+      
+  
+      userHelpers.deleteCart(id,pid).then((response) => {
+        res.json(response);
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
 
   //   deleteProduct: (req, res, next) => {
   //   try {

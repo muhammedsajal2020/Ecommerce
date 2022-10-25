@@ -139,7 +139,7 @@
                                     <th>Product</th>
                                     <th>Price</th>
                                     <th>view </th>
-                                    <th>Delete</th>
+                                    <th>Remove</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -173,7 +173,7 @@
                                   
                                     </td> --}}
                                     <td class="cart__total"><a href="/product-details/{{this.product._id}}" class="btn btn-primary">Details</a></td>
-                                    <td class=""><span class=""><a class="btn btn-danger" data-id="{{this._id}}" data-pid="{{this.product._id}}" onclick="deleteProduct(this)">Delete</a></span></td>
+                                    <td class=""><span class=""><a class="btn btn-danger" data-id="{{this._id}}" data-pid="{{this.product._id}}" onclick="deleteProduct(this)">Remove</a></span></td>
                                 </tr>
                                 {{/each}}
                              

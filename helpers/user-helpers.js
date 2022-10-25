@@ -459,7 +459,7 @@ changePaymentStatus:(orderId)=>{
 
 },
 deleteWish:(id,pid)=>{
-    console.log(id,pid,'mmmmmmmmmmmmmmmmmmmmmmm');
+    console.log(id,pid,'mm');
     return new Promise((resolve,reject)=>{
     try {
        
@@ -476,6 +476,24 @@ deleteWish:(id,pid)=>{
     }
 })
 },
+deleteCart:(id,pid)=>{
+    console.log(id,pid,'ddddddddddd');
+    return new Promise((resolve,reject)=>{
+    try {
+       
+            db.get().collection(collection.CART_COLLECTION).updateOne({_id:objectId(id)},
+            {
+                $pull:{products:{item:objectId(pid)}}
+            }
+            ).then((response)=>{
+                resolve({deleteProduct:true})
+            })
+       
+    } catch (error) {
+        reject(error)
+    }
+})
+}
 
 
 }

@@ -135,7 +135,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shop__cart__table">
-                        <table>
+                        <table  class="table" id="myDiv">
                             <thead>
                                 <tr>
                                     <th>Product</th>
@@ -174,7 +174,7 @@
                                         </div>
                                   
                                     </td>
-                                    <td class=""><a  class="btn btn-danger" href="" >Remove</a><span class=""></span></td>
+                                    <td class=""><a  class="btn btn-danger"  data-id="{{this._id}}" data-pid="{{this.product._id}}" onclick="deleteProduct(this)" href="" >Remove</a><span class=""></span></td>
                                     <td class="cart__total"></td>
                                     
                                 </tr>
@@ -400,6 +400,39 @@
                 }
             })
         }
+
+        //
+         function deleteProduct(value){
+            var id = $(value).data('id');
+            var pid = $(value).data('pid');
+            console.log(id,pid,"ifshfskfksjfsfu")
+            $.ajax({
+                url:'/delete-cart',
+                data: {
+                    _id: id,
+                    pid: pid,
+
+       
+        
+        
+      },
+       
+                method:'post',
+                success:(response)=>{
+                    if(response.deleteProduct){
+                        //alert('Do you want to remove the product')
+                        Swal.fire(
+  'Product removed!',
+  'You clicked the button!',
+  'success'
+)
+                        //location.reload()
+                        $("#myDiv").load(location.href + " #myDiv");
+                         $("#wish-count").load(location.href+" #wish-count");
+                    }
+                }
+            })
+         }
     </script>
 
     <!-- Js Plugins -->
