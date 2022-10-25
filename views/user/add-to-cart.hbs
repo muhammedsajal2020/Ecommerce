@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -13,7 +12,7 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="user/css/bootstrap.min.css" type="text/css">
@@ -39,11 +38,11 @@
         <ul class="offcanvas__widget">
             <li><span class="icon_search search-switch"></span></li>
             <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
-            <li><a href="/cart"><span class="icon_bag_alt" id="cart-count" ></span>
-                                <div class="tip" id="cart-count">{{cartCount}}</div>
-                            </a></li>
+                    <div class="tip">2</div>
+                </a></li>
+            <li><a href="/cart"><span class="icon_bag_alt" id="cart-count"></span>
+                    <div class="tip" id="cart-count">{{cartCount}}</div>
+                </a></li>
         </ul>
         <div class="offcanvas__logo">
             <a href="./"><img src="user/img/logo.png" alt=""></a>
@@ -93,16 +92,16 @@
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
-                         
+
                             <li><a href="/heart_icon"><span class="icon_heart_alt"></span>
-                                <div class=""></div>
-                            </a></li>
-                            <li><a href="/cart"><span class="icon_bag_alt" id="cart-count" ></span>
-                            {{#if user}}
-                                <div class="tip" id="cart-count">{{cartCount}}</div>
-                                 {{/if}}
-                            </a></li>
-                       
+                                    <div class=""></div>
+                                </a></li>
+                            <li><a href="/cart"><span class="icon_bag_alt" id="cart-count"></span>
+                                    {{#if user}}
+                                    <div class="tip" id="cart-count">{{cartCount}}</div>
+                                    {{/if}}
+                                </a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -135,7 +134,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shop__cart__table">
-                        <table  class="table" id="myDiv">
+                        <table class="table" id="myDiv">
                             <thead>
                                 <tr>
                                     <th>Product</th>
@@ -148,9 +147,10 @@
                             <tbody>
                                 {{#each products}}
                                 <tr>
-                                
+
                                     <td class="cart__product__item">
-                                        <img src="/product-images/{{this.product.images.[0]}}"  style="width:50px;height:50px;" alt="">
+                                        <img src="/product-images/{{this.product.images.[0]}}"
+                                            style="width:50px;height:50px;" alt="">
                                         <div class="cart__product__item__title">
                                             <h6>{{this.product.product_name}}</h6>
                                             <div class="rating">
@@ -163,24 +163,28 @@
                                         </div>
                                     </td>
                                     <td class="cart__price">{{this.product.product_price}}</td>
-                                
-                                    <td class="cart__quantity"  >
-                                        <div class="" > 
-                                            <button class="cart-item-count" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button>
-                                            {{!-- <input type="text"  value="" >{{this.quantity}} --}}
+
+                                    <td class="cart__quantity">
+                                        <div class="">
+                                            <button class="cart-item-count"
+                                                onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button>
+                                            {{!-- <input type="text" value="">{{this.quantity}} --}}
                                             <span id="{{this.product._id}}">{{this.quantity}} </span>
-                                            
-                                            <button class="cart-item-count " onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
+
+                                            <button class="cart-item-count "
+                                                onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
                                         </div>
-                                  
+
                                     </td>
-                                    <td class=""><a  class="btn btn-danger"  data-id="{{this._id}}" data-pid="{{this.product._id}}" onclick="deleteProduct(this)" href="" >Remove</a><span class=""></span></td>
+                                    <td class=""><a class="btn btn-danger" data-id="{{this._id}}"
+                                            data-pid="{{this.product._id}}" onclick="deleteProduct(this)"
+                                            href="">Remove</a><span class=""></span></td>
                                     <td class="cart__total"></td>
-                                    
+
                                 </tr>
                                 {{/each}}
-                             
-                                
+
+
                             </tbody>
                         </table>
                     </div>
@@ -201,19 +205,19 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="discount__content">
-                        <h6>Discount codes</h6>
-                        <form action="#">
+                        {{!-- <h6>Discount codes</h6> --}}
+                        <form action="">
                             {{!-- <input type="text" placeholder="Enter your coupon code"> --}}
-                            <div class="input-group ">
+                            {{!-- <div class="input-group ">
 
-  <select class="custom-select" id="inputGroupSelect01">
-    {{#each coupons}}
-    <option value="1">{{this.coupon}}</option>
-    {{/each}}
-   
-  </select>
-</div>
-                            <button type="submit" class="site-btn mt-5">Apply</button>
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    {{#each coupons}}
+                                    <option value="1">{{this.coupon}}</option>
+                                    {{/each}}
+
+                                </select>
+                            </div> --}}
+                            {{!-- <button type="submit" class="site-btn mt-5">Apply</button> --}}
                         </form>
                     </div>
                 </div>
@@ -299,7 +303,7 @@
                             <a href="./index.html"><img src="user/img/logo.png" alt=""></a>
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        cilisis.</p>
+                            cilisis.</p>
                         <div class="footer__payment">
                             <a href="#"><img src="user/img/payment/payment-1.png" alt=""></a>
                             <a href="#"><img src="user/img/payment/payment-2.png" alt=""></a>
@@ -352,7 +356,11 @@
                 <div class="col-lg-12">
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     <div class="footer__copyright__text">
-                        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                        <p>Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This
+                            template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
+                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </p>
                     </div>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </div>
@@ -372,67 +380,67 @@
     </div>
     <!-- Search End -->
     <script>
-        function changeQuantity(cartId,proId,userId,count){
-            let quantity=parseInt(document.getElementById(proId).innerHTML)
-         count =parseInt(count)
-         console.log(userId)
-         
+        function changeQuantity(cartId, proId, userId, count) {
+            let quantity = parseInt(document.getElementById(proId).innerHTML)
+            count = parseInt(count)
+            console.log(userId)
+
             $.ajax({
-                url:'/change-product-quantity',
-                data:{
-                    user:userId,
-                    cart:cartId,
-                    product:proId,
-                    count:count,
-                    quantity:quantity
-                    
+                url: '/change-product-quantity',
+                data: {
+                    user: userId,
+                    cart: cartId,
+                    product: proId,
+                    count: count,
+                    quantity: quantity
+
                 },
-                method:'post',
-                success:(response)=>{
-                    if(response.removeProduct){
+                method: 'post',
+                success: (response) => {
+                    if (response.removeProduct) {
                         alert("Product Removed From Cart ")
                         location.reload()
-                    }else{
-                        document.getElementById(proId).innerHTML=quantity+count
-                        document.getElementById('total').innerHTML=response.total
+                    } else {
+                        document.getElementById(proId).innerHTML = quantity + count
+                        document.getElementById('total').innerHTML = response.total
                     }
-                   
+
                 }
             })
         }
 
         //
-         function deleteProduct(value){
+        function deleteProduct(value) {
             var id = $(value).data('id');
             var pid = $(value).data('pid');
-            console.log(id,pid,"ifshfskfksjfsfu")
+            console.log(id, pid, "ifshfskfksjfsfu")
             $.ajax({
-                url:'/delete-cart',
+                url: '/delete-cart',
                 data: {
                     _id: id,
                     pid: pid,
 
-       
-        
-        
-      },
-       
-                method:'post',
-                success:(response)=>{
-                    if(response.deleteProduct){
+
+
+
+                },
+
+                method: 'post',
+                success: (response) => {
+                    if (response.deleteProduct) {
                         //alert('Do you want to remove the product')
                         Swal.fire(
-  'Product removed!',
-  'You clicked the button!',
-  'success'
-)
+                            'Product removed!',
+                            'You clicked the button!',
+                            'success'
+                        )
                         //location.reload()
                         $("#myDiv").load(location.href + " #myDiv");
-                         $("#wish-count").load(location.href+" #wish-count");
+                        $("#wish-count").load(location.href + " #wish-count");
                     }
                 }
             })
-         }
+        }
     </script>
 
     <!-- Js Plugins -->
