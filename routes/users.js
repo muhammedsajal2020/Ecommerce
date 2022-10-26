@@ -318,6 +318,11 @@ router.post("/checkCoupen", async (req, res, next) => {
     next(err)
   }
 })
+router.get('/edit-user',(req,res)=>{
+
+  res.render('user/userEdit')
+
+})
 
 
 module.exports = router;

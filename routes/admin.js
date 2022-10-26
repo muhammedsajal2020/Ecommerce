@@ -56,6 +56,12 @@ router.post('/adminlogin', function(req, res, next) {
 
  
 });
+router.get('/adminlogout', (req, res) => {
+  console.log("hi");
+  // req.session.user = null
+  req.session.adminLoggedIn = false
+  res.redirect('/admin/adminlogin')
+})
 
 
 
@@ -63,13 +69,13 @@ router.post('/adminlogin', function(req, res, next) {
 router.get('/addproduct',verifyLogin,function(req, res, next) {
   categoryHelpers.getAllCategory().then((categorys)=>{
 
-  res.render('admin/add-product',{categorys})
+  res.render('admin/add-product',{admin:true,categorys})
   })
 });
 
 router.get('/addcategoty',verifyLogin, function(req, res, next) {
   categoryHelpers.getAllCategory().then((categorys)=>{
-  res.render('admin/add-category',{categorys})
+  res.render('admin/add-category',{admin:true,categorys})
   })
 });
 

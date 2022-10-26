@@ -170,7 +170,7 @@
                             <i class="fa fa-star"></i>
                             <span>( 138 reviews )</span>
                         </div>
-                        <div class="product__details__price">{{product.product_price}} <span>$ 83.0</span></div>
+                        <div class="product__details__price">{{product.product_price}} <span></span></div>
                         <p>{{product.product_description}}</p>
                         <div class="product__details__button">
                             {{!-- <div class="quantity">
@@ -179,7 +179,7 @@
                                     <input type="text" value="1">
                                 </div>
                             </div> --}}
-                           <a class="btn btn-danger"  onclick="addToCart('{{this._id}}')" >Add to cart</a>
+                           <a    onclick="addToCart('{{product._id}}')"   ><span class="btn btn-danger"  >add to cart</span></a>
                             {{!-- <ul>
                                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
@@ -385,22 +385,22 @@
     </div>
     <!-- Search End -->
     <script>
-          function addToCart(proId){
-        $.ajax({
-            url:'/addtocart/'+proId,
-            method:'get',
-            success:(response)=>{
-                if(response.status){
-                    let count=$('#cart-count').html()
-                    count=parseInt(count)+1
-                    $("cart-count").html(count)
-                    Swal.fire("Added to cart");
+         // function addToCart(proId){
+       // $.ajax({
+          //  url:'/addtocart/'+proId,
+           // method:'get',
+            //success:(response)=>{
+               // if(response.status){
+                  //  let count=$('#cart-count').html()
+                    //count=parseInt(count)+1
+                   // $("cart-count").html(count)
+                   // Swal.fire("Added to cart");
 
-                }
+               // }
                 
-            }
-        })
-    }
+           // }
+        //})
+   // }
     </script>
 
     <!-- Js Plugins -->
