@@ -149,20 +149,28 @@
                             </ul>
                         </div>
                         <div class="contact__form">
+                            <a href="/add-address" class="btn btn-dark float-right ">Add address</a>
                             <h5>Edit Profile</h5>
-                            <form action="#">
+                            
+                            <form action="/edit-user/{{user._id}}" id="userSignup" method="post">
                                 <label class="form-label" for="form1Example13">Name</label>
-                                <input type="text" placeholder="Name" value="{{user.name}}">
+                                <input type="text" name="name"  id="name" placeholder="Name" value="{{user.name}}">
                                  <label class="form-label" for="form1Example13">Second Name</label>
-                                <input type="text" placeholder="Email" value="{{user.second_name}}">
+                                <input type="text" name="second_name"  id="second_name" placeholder="Email" value="{{user.second_name}}">
                                  <label class="form-label" for="form1Example13">Email</label>
-                                <input type="text" placeholder="Website" value="{{user.email}}">
-                                 <label class="form-label" for="form1Example13">Address</label>
-                                <textarea placeholder="Address"></textarea>
+                                <input type="email" name="email" id="email" placeholder="Website" value="{{user.email}}">
+                                   <label class="form-label" for="form1Example13">Phone</label>
+                                <input type="tel" name="phone_number" id="phone_number"  placeholder="" value="{{user.phone_number}}">
+                                    <label class="form-label" for="form1Example13">Password</label>
+                                <input type="password" name="password" id="password" placeholder="" value="{{user.confirmPassword}}">
+                                   <label class="form-label" for="form1Example13">confirm Password</label>
+                                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="" value="">
                                  
-                               
+                                 
+                               <button href="" type="submit" class="btn btn-dark">save</button>
                             </form>
-                            <a href="/edit-user" class="btn btn-danger">Edit Profile</a>
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -318,6 +326,81 @@
     </div>
 </div>
 <!-- Search End -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+
+
+
+
+<style>
+  .error{
+    color: rgb(242, 9, 9);
+  }
+</style>
+
+<script>
+  jQuery.validator.addMethod("lettersonly", function(value, element) {
+  return this.optional(element) || /^[a-z]+$/i.test(value);
+}, "Letters only please"); 
+
+    $("#userSignup").validate({
+
+
+        rules: {
+            name: {
+                required: true,
+                minlength: 2,
+                lettersonly:true
+
+            },
+             second_name: {
+                required: true,
+                minlength: 2,
+                lettersonly:true
+            },
+
+            email: {
+                required: true,
+                email: true
+            },
+
+            phone_number: {
+                required: true,
+                minlength: 10,
+                maxlength:10
+            },
+
+            password: {
+                required: true,
+                minlength: 6,
+                maxlength: 10
+
+            },
+
+            confirmPassword: {
+                required: true,
+                equalTo: '#password',
+                minlength: 6,
+                maxlength: 10
+            }
+
+
+        },
+        messages: {
+            Password: {
+                required: "the password is required"
+
+            },
+            confirm_password: {
+                equalTo: "enter the same password"
+
+            },
+        }
+    })
+
+
+</script>
 
 <!-- Js Plugins -->
 <script src="/user/js/jquery-3.3.1.min.js"></script>

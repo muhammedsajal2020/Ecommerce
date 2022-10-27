@@ -238,26 +238,7 @@ router.post("/delete-cart", (req, res, next) => {
   }
 });
 
-//   deleteProduct: (req, res, next) => {
-//   try {
-//     console.log(req.body);
 
-//     cartHelpers.deleteProduct(req.body).then((resposne) => {
-//       console.log(resposne, "kooooi")
-
-//       res.json({ response })
-
-
-
-//     })
-
-//   } catch (error) {
-
-//     next(error)
-
-//   }
-
-// }
 router.post("/checkCoupen", async (req, res, next) => {
   try {
     if (req.session.coupen) {
@@ -285,26 +266,7 @@ router.post("/checkCoupen", async (req, res, next) => {
         }
 
         console.log(coupen, "aa", coupen);
-        //   for (let i = 0; i < coupen.coupons.length; i++) {
-        //     if (String(coupen.coupons[i]) === String(data[0]._id)) {
-        //       console.log("haha");
-        //       coupenExist = true;
-        //       break;
-        //     }
-        //   }
-        //   if (coupenExist) {
-        //     console.log('exist');
-        //     res.json({ msg: 'coupenExist' });
-        //   } else {
-        //     console.log('true');
-        //     req.session.coupen = data;
-        //     console.log('kaak', req.session.coupen);
-        //     res.json({ msg: 'success', data: data });
-        //   }
-
-        // }  else {
-        //   console.log("coupen not found");
-        //   res.json({ msg: 'coupennotfound' });
+       
       }
       else {
         console.log("coupen not found");
@@ -318,11 +280,19 @@ router.post("/checkCoupen", async (req, res, next) => {
     next(err)
   }
 })
-router.get('/edit-user',(req,res)=>{
+router.get('/add-address',(req,res)=>{
 
-  res.render('user/userEdit')
+  res.render('user/userAddress')
 
 })
+router.post('/edit-user/:id', (req, res, next) => {
+  console.log('userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+    
+    userHelpers.editUserDetails(req.params.id,req.body).then(()=>{
+
+    res.redirect('/account');
+  })
+});
 
 
 module.exports = router;

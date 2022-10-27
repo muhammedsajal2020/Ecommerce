@@ -6,6 +6,7 @@ const { ObjectId } = require('mongodb')
 const { response } = require('../app')
 const Razorpay = require('razorpay');
 const { log } = require('console')
+const async = require('hbs/lib/async')
 var instance = new Razorpay({
     key_id: 'rzp_test_mClNRE8FWEq5Jp',
     key_secret: 'Ll7EcfrmETS6DQeeRNOtdkjF',
@@ -493,38 +494,29 @@ deleteCart:(id,pid)=>{
         reject(error)
     }
 })
+}, editUserDetails:(userId,userDetails)=>{
+    return new Promise(async(resolve, reject) => {
+        userDetails.password = await bcrypt.hash(userDetails.password, 10)
+        db.get().collection(collection.USER_COLLECTION)
+        .updateOne({_id:objectId(userId)},{
+            $set:{
+                name:userDetails.name,
+                second_name:userDetails.second_name,
+                email:userDetails.email,
+                phone_number:userDetails.phone_number,
+                password:userDetails.password,
+                confirmPassword:userDetails.confirmPassword
+            }
+        }).then((response)=>{
+           resolve() 
+        })
+    })
+
 }
 
 
 }
-//
-// deleteProduct: (proDetails) => {
-//     return new Promise((resolve, reject) => {
-//     try {
-        
-//             db.get().collection('cart').updateOne({ _id: objectId(proDetails.cart) },
-//                 {
-//                     $pull: { product: { item: objectId(proDetails.product) } }
-//                 }
-//             ).then((respsone) => {
 
-//                 resolve({ removePro: true })
-
-//             }).catch(function () {
-
-//                 console.log('Some error has occurred');
-
-//             })
-
-       
-        
-//     } catch (error) {
-//         reject(error)
-//     }
-  
-// })
-
-// }
 
 
     
