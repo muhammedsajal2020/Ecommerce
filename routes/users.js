@@ -286,12 +286,19 @@ router.get('/add-address',(req,res)=>{
 
 })
 router.post('/edit-user/:id', (req, res, next) => {
-  console.log('userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
     
     userHelpers.editUserDetails(req.params.id,req.body).then(()=>{
 
     res.redirect('/account');
   })
+});
+
+router.post('/addAddress', (req, res, next) => {
+    
+  console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+
+  res.redirect('/add-address');
+
 });
 
 

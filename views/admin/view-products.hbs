@@ -1,15 +1,16 @@
 
-  <div class="container mt-auto p-5" style="" >
+
+
+      <div class="container mt-auto p-5" style="" >
     <div class="row justify-content-md-center">
            <div class="col col-lg-8">
-
-<div class="mx-auto" style="width: 800px;x">
-      <table class="table table-bordered table-responsive-md table-striped text-center">
         
-        <thead>
-          <tr>
-            {{!-- <th class="text-center">Product id</th> --}}
-            <th class="text-center">Product Name</th>
+<table id="table_productView" class="display">
+    <thead>
+        
+        <tr>
+           
+             <th class="text-center">Product Name</th>
             <th class="text-center">Brand Name</th>
              <th class="text-center">Price</th>
             <th class="text-center">Catogory</th>
@@ -18,12 +19,14 @@
             <th class="text-center">image</th>
             <th class="text-center">Edit</th>
             <th class="text-center">Delete</th>
-          </tr>
-        </thead>
-        {{#each products}}
+            
+           
+        </tr>
+    </thead>
+     {{#each products}}
         <tbody>
           <tr>
-            {{!-- <td class="pt-3-half" contenteditable="true">{{this.product_id}}</td> --}}
+            
             <td class="pt-3-half" contenteditable="true">{{this.product_name}}</td>
             <td class="pt-3-half" contenteditable="true">{{this.Brand_name}}</td>
             <td class="pt-3-half" contenteditable="true">{{this.product_price}}</td>
@@ -49,13 +52,19 @@
               
             </td>
           </tr>
-          <!-- This is our clonable table line -->
+          
           
         </tbody>
          {{/each}}
-      </table>
-      </div>
-      </div>
-      </div>
-      </div>
+</table>
+</div>
+</div>
+</div>
+<script>
+$(document).ready( function () {
+    $('#table_productView').DataTable();
+} );
+</script>
+
+
 

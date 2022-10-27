@@ -120,7 +120,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <span>Edit user</span>
+                        <span>Add address</span>
                     </div>
                 </div>
             </div>
@@ -135,28 +135,23 @@
                     <div class="contact__content">
                      
                         <div class="contact__form">
-                            <h5>Edit Profile</h5>
-                            <form action="#">
-                                <label class="form-label" for="form1Example13">Name</label>
-                                <input type="text" placeholder="Name" value="{{user.name}}">
-                                 <label class="form-label" for="form1Example13">Second Name</label>
-                                <input type="text" placeholder="Email" value="{{user.second_name}}">
-                                 <label class="form-label" for="form1Example13">Email</label>
-                                <input type="text" placeholder="Website" value="{{user.email}}">
-                                 <label class="form-label" for="form1Example13">Phone</label>
-                                <input type="text" placeholder="Website" value="{{user.email}}">
-                                 <label class="form-label" for="form1Example13">Address</label>
-                                <input type="text" placeholder="address" value="{{user.email}}">
-                                 <label class="form-label" for="form1Example13">State</label>
-                                <input type="text" placeholder="Name" value="{{user.name}}">
-                                 <label class="form-label" for="form1Example13">District</label>
-                                <input type="text" placeholder="Name" value="{{user.name}}">
-                                 <label class="form-label" for="form1Example13">Postcode</label>
-                                <input type="text" placeholder="Name" value="{{user.name}}">
-                                 
+                            <h5>Add address</h5>
+                            <form action="/addAddress" method="post">
                                
+                                 <label class="form-label" for="form1Example13">Address</label>
+                                <input type="text" placeholder="address" value="">
+                                 <label class="form-label" for="form1Example13">Town/city</label>
+                                <input type="text" placeholder="Town/city" value="">
+                                 <label class="form-label" for="form1Example13">State</label>
+                                <input type="text" placeholder="State" value="">
+                                 <label class="form-label" for="form1Example13">District</label>
+                                <input type="text" placeholder="District" value="">
+                                 <label class="form-label" for="form1Example13">Postcode</label>
+                                <input type="text" placeholder="Postcode" value="">
+                                 
+                               <button type="submit"  class="btn btn-dark col-md-4 text-center">Add</button>
                             </form>
-                            <a href="/edit-user" class="btn btn-danger">Edit Profile</a>
+                            
                         </div>
                     </div>
                 </div>

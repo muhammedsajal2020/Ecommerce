@@ -144,7 +144,7 @@ router.get('/edit-product/:id',verifyLogin, async (req, res, next)=> {
   let product=await productHelpers.getProductDetails(req.params.id)
   categoryHelpers.getAllCategory().then((categorys)=>{
 
-  res.render('admin/edit-product',{product,categorys})
+  res.render('admin/edit-product',{admin:true,product,categorys})
   })
 });
 router.post('/edit-product/:id',verifyLogin,uploads.array("image", 3),(req, res)=>{
@@ -226,6 +226,15 @@ res.render('admin/css-test')
       }catch (err){
         next(err)
       }
+    })
+    router.get('/delete-Category/:id',(req,res)=>{
+      let catId=req.params.id
+      console.log(catId);
+      categoryHelpers.deleteCategory(catId).then((response)=>{
+        res.redirect('/admin/addcategoty')
+      })
+      
+      
     })
 
   //error

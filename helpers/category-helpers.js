@@ -1,6 +1,7 @@
 var db=require('../config/connection')
 var collection=require('../config/collections')
 const collections = require('../config/collections')
+var objectId=require('mongodb').ObjectId
 
 
 module.exports={
@@ -16,5 +17,14 @@ module.exports={
                 resolve(categorys)
             
         })
-    } 
+    },
+    deleteCategory:(catId)=>{
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.CATEGORY_COLLECTION).deleteOne({_id:objectId(catId)}).then((response)=>{
+                console.log(response);
+                resolve(response)
+            })
+            
+        })
+    }
 }

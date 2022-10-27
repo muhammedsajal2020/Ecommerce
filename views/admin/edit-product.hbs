@@ -7,16 +7,12 @@
 <fieldset>
 
 <!-- Form Name -->
-<a href="/admin"><legend >Admin Home</legend></a>
+{{!-- <a href="/admin"><legend >Admin Home</legend></a> --}}
 
-<!-- Text input-->
-{{!-- <div class="form-group">
-  <label class="col-md-4 control-label" for="product_id">PRODUCT ID</label>  
-  <div class="col-md-4">
-  <input id="product_id" value="{{product.product_id}}" name="product_id" placeholder="PRODUCT ID" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div> --}}
+
+<div class="container mt-auto p-5" style="" >
+    <div class="row justify-content-md-center">
+           <div class="col col-lg-8">
 
 <!-- Text input-->
 <div class="form-group">
@@ -48,7 +44,7 @@
   <div class="col-md-4">
     <select class=" custom-select"  id="floatingSelect"
                         aria-label="Floating label select example" name="product_category">
-    <option selected>Choose...</option>
+    
      {{#each categorys}}
     <option value={{this._id}}>{{this.category_name}}</option>
     {{!-- <option value="2">Women</option> --}}
@@ -101,3 +97,6 @@
 
 </fieldset>
 </form>
+</div>
+</div>
+</div>
