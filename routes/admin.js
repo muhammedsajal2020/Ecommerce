@@ -194,7 +194,8 @@ router.get('/active_user/:id',verifyLogin, (req, res, next)=> {
   })
   router.get('/orders', verifyLogin,(req,res)=>{
     adminHelpers.getAllorders().then((orders)=>{
-    res.render('admin/orders',{admin:true,orders})
+      let statusorder=orders;
+    res.render('admin/orders',{admin:true,orders,statusorder})
     })
   })
   router.get('/css-test', verifyLogin,(req,res)=>{

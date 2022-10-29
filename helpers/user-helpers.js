@@ -459,6 +459,21 @@ changePaymentStatus:(orderId)=>{
     })
 
 },
+orderShipped:(orderId)=>{
+    return new Promise((resolve, reject) => {
+        db.get().collection(collection.ORDER_COLLECTION)
+        .updateOne({_id:objectId(orderId)},
+        {
+            $set:{
+                status:'shipped'
+            }
+        }).then(()=>{
+            resolve()
+        })
+    })
+
+},
+
 deleteWish:(id,pid)=>{
     console.log(id,pid,'mm');
     return new Promise((resolve,reject)=>{
@@ -510,6 +525,26 @@ deleteCart:(id,pid)=>{
         }).then((response)=>{
            resolve() 
         })
+    })
+
+},
+// db.get().collection(collection.USER_COLLECTION).update({_id:objectId(userId)},
+// { $set: { address: addressData } }
+
+addAddress:(userId,addressData)=>{
+    console.log('llllllllllll',addressData);
+    return new Promise((resolve, reject) => {
+
+      
+   db.get().collection(collection.USER_COLLECTION).updateOne({ _id: objectId(userId) },
+      {
+        $push: { 'address': addressData}
+      }
+                     
+         ).then((response)=>{
+          resolve()
+         })
+        
     })
 
 }

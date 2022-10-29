@@ -136,18 +136,18 @@
                      
                         <div class="contact__form">
                             <h5>Add address</h5>
-                            <form action="/addAddress" method="post">
+                            <form action="/addAddress/{{user._id}}" method="post">
                                
                                  <label class="form-label" for="form1Example13">Address</label>
-                                <input type="text" placeholder="address" value="">
+                                <input type="text" name="address1" placeholder="address" value="">
                                  <label class="form-label" for="form1Example13">Town/city</label>
-                                <input type="text" placeholder="Town/city" value="">
+                                <input type="text" name="town/city" placeholder="Town/city" value="">
                                  <label class="form-label" for="form1Example13">State</label>
-                                <input type="text" placeholder="State" value="">
+                                <input type="text" name="state" placeholder="State" value="">
                                  <label class="form-label" for="form1Example13">District</label>
-                                <input type="text" placeholder="District" value="">
+                                <input type="text" name="district" placeholder="District" value="">
                                  <label class="form-label" for="form1Example13">Postcode</label>
-                                <input type="text" placeholder="Postcode" value="">
+                                <input type="text" name="postcode" placeholder="Postcode" value="">
                                  
                                <button type="submit"  class="btn btn-dark col-md-4 text-center">Add</button>
                             </form>

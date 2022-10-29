@@ -6,7 +6,8 @@ const userHelpers = require('../helpers/user-helpers');
 const couponHelpers = require('../helpers/coupon-helpers');
 const { route } = require('./admin');
 var db = require('../config/connection')
-var collection = require('../config/collections')
+var collection = require('../config/collections');
+const async = require('hbs/lib/async');
 var objectId = require('mongodb').ObjectId
 
 const verifyLogin = (req, res, next) => {
@@ -280,26 +281,41 @@ router.post("/checkCoupen", async (req, res, next) => {
     next(err)
   }
 })
-router.get('/add-address',(req,res)=>{
+router.get('/add-address',async(req,res)=>{
+  let user = await userHelpers.getOneuserDetails(req.session.user._id)
 
-  res.render('user/userAddress')
+  res.render('user/userAddress',{user})
 
 })
 router.post('/edit-user/:id', (req, res, next) => {
     
-    userHelpers.editUserDetails(req.params.id,req.body).then(()=>{
+   userHelpers.editUserDetails(req.params.id,req.body).then(()=>{
 
     res.redirect('/account');
   })
 });
 
-router.post('/addAddress', (req, res, next) => {
-    
-  console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
-
-  res.redirect('/add-address');
-
+router.post('/addAddress/:id',(req, res, next) => {  
+   
+  console.log('kkkkkkkkkkkkkkkkkkkkkkkkk');
+  addressData=req.body
+  userId=req.session.user._id;
+ 
+userHelpers.addAddress(userId,addressData).then(()=>{
+    res.redirect('/add-address');
+  })
+  
 });
+router.get('',(req,res)=>{
+  userHelpers.orderShipped(req.body['order[receipt]']).then(() => {
+
+    
+  })
+
+})
+
+
+  
 
 
 module.exports = router;
