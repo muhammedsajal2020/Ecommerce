@@ -139,7 +139,7 @@
                                 <tr>
                                     <th>Product</th>
                                     <th>Price</th>
-                                    <th>Quantity</th>
+                                    <th>Qty</th>
                                     <th>Remove</th>
                                     <th></th>
                                 </tr>
@@ -162,7 +162,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="cart__price">{{this.product.product_price}}</td>
+                                    <td class="cart__price">₹{{this.product.product_price}}</td>
 
                                     <td class="cart__quantity">
                                         <div class="">
@@ -226,9 +226,11 @@
                         {{!-- <h6>Cart total</h6> --}}
                         <ul>
                             {{!-- <li>Subtotal <span>$ 750.0</span></li> --}}
-                            <li>Total <span id="total">{{total}}</span></li>
+                            <li>Total <span id="total">₹{{total}}</span></li>
                         </ul>
+                        {{#if products}}
                         <a href="/place-order" class="primary-btn">Proceed to checkout</a>
+                        {{/if}}
                     </div>
                 </div>
             </div>

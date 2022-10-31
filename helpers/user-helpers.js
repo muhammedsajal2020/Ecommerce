@@ -372,38 +372,86 @@ getUserOrders:(userId)=>{
         resolve(orders)
     })
 },
-getOrderProducts:(orderId)=>{
-    return new Promise(async(resolve, reject) => {
-        let orderItems= await db.get().collection(collection.ORDER_COLLECTION).aggregate([
-            {
-                $match:{_id:new objectId(orderId)}
-            },
-            {
-                $unwind:'$products'
-            },
-            {
-                $project:{
-                    item:'$products.item',
-                    quantity:'$products.quantity',
-                }
-            },
-             {
-                $lookup:{
-                    from:collection.PRODUCT_COLLECTION,
-                    localField:'item',
-                    foreignField:'_id',
-                    as:'product'
-                }
-            },
-            {
-                $project:{
-                    item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
-                }
-            }
+//  getOrderProducts:(orderId)=>{
+//     return new Promise(async(resolve, reject) => {
+//         let orderItems= await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+//             {
+//                 $match:{_id:new objectId(orderId)}
+//             },
+//             {
+//                 $unwind:'$products'
+//             },
+//             {
+//                 $project:{
+//                     item:'$products.item',
+//                     quantity:'$products.quantity',
+//                 }
+//             },
+//              {
+//                 $lookup:{
+//                     from:collection.PRODUCT_COLLECTION,
+//                     localField:'item',
+//                     foreignField:'_id',
+//                     as:'product'
+//                 }
+//             },
+//             {
+//                 $project:{
+//                     item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
+//                 }
+//             }
         
-        ]).toArray()
-        console.log(orderItems);
-        resolve(orderItems)
+//         ]).toArray()
+//         console.log(orderItems);
+//         resolve(orderItems)
+//     })
+
+// },
+getOrderProducts: (orderId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            orderItems = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+                {
+                    $match: { _id: new objectId(orderId) }
+                },
+                {
+                    $unwind: '$products'
+                },
+                {
+                    $project: {
+                        item: '$products.item',
+                        quantity: '$products.quantity',
+                        status: '$status',
+                        date: '$date',
+                        totalAmount: '$totalAmount',
+                      
+
+                    }
+                },
+                {
+                    $lookup: {
+                        from:'product',
+                        localField: 'item',
+                        foreignField: '_id',
+                        as: 'product'
+                    }
+                },
+                {
+                    $project: {
+                        totalAmount: 1, status: 1, data: 1, item: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }
+                    }
+                }
+
+            ]).toArray()
+
+            resolve(orderItems)
+
+
+
+        } catch (error) {
+            reject(error)
+        }
     })
 
 },
@@ -538,7 +586,7 @@ addAddress:(userId,addressData)=>{
       
    db.get().collection(collection.USER_COLLECTION).updateOne({ _id: objectId(userId) },
       {
-        $push: { 'address': addressData}
+        $push: { 'address': addressData,}
       }
                      
          ).then((response)=>{
@@ -547,8 +595,102 @@ addAddress:(userId,addressData)=>{
         
     })
 
-}
+},
+// getAllAddress: (userId) => {
+//     return new Promise(async (resolve, reject) => {
+//     try {
+     
+//         let alladdress = await db.get().collection(collection.USER_COLLECTION).find().toArray();
+//         resolve(alladdress)
+//         console.log('all address',alladdress);
+     
+//     } catch (error) {
+//       reject(error)
+//     }
+//   })
+//   },
+getAllAddress: (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
 
+            orderItems = await db.get().collection(collection.USER_COLLECTION).aggregate([
+                {
+                    $match: { _id: new objectId(userId) }
+                },
+                {
+                    $unwind: '$address'
+                },
+                {
+                    $project: {
+                        address1: '$address.address1',
+                        towncity: '$address.town/city',
+                        state: '$address.state',
+                        district: '$address.district',
+                        postcode: '$address.postcode',
+                      
+
+                    }
+                },
+                {
+                    $lookup: {
+                        from:'user',
+                        localField: 'address1',
+                        foreignField: '_id',
+                        as: 'alladdress'
+                    }
+                },
+                {
+                    $project: {
+                        address1: 1, towncity: 1, state: 1, item: 1, district: 1,postcode:1, alladdress: { $arrayElemAt: ['$alladdress', 0] }
+                    }
+                }
+
+            ]).toArray()
+
+            resolve(orderItems)
+
+
+
+        } catch (error) {
+            reject(error)
+        }
+    })
+
+},
+editUserAddress : (userId, address, addressId) => {
+    return new Promise((resolve, reject) => {
+    try {
+   
+            db.get().collection(collections.USER_collection).updateOne({ _id: objectId(userId), 'Addresses._addId': addressId },
+
+
+                {
+                    $set: {
+
+                        "Addresses.$.Name": address.Name,
+                        "Addresses.$.Email": address.Email,
+                        "Addresses.$.Building_Name": address.Building,
+                        "Addresses.$.Street_Name": address.Street,
+                        "Addresses.$.City": address.City,
+                        "Addresses.$. District": address.District,
+                        "Addresses.$.Country": address.Country,
+                        "Addresses.$.State": address.State
+                    }
+                }
+            ).then((response) => {
+                resolve(response)
+            })
+
+    
+    } catch (error) {
+        reject(error)
+    }
+})
+
+
+
+
+}
 
 }
 

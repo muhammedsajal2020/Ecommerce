@@ -12,6 +12,7 @@ const ADMINMAIL='admin@gmail.com';
 const ADMINPASSWORD='admin123';
 const verifyLogin=(req,res,next)=>{
   if(req.session.adminLoggedIn){
+   
     next()
   }else{
     res.redirect('admin/adminlogin')
@@ -33,12 +34,18 @@ const uploads = multer({
 
 /* GET users listing. */
 router.get('/',function(req, res, next) {
+  if(req.session.adminLoggedIn){
+    res.render('admin/adminhome',)
+  }
+ 
   if(verifyLogin){
     res.render('admin/adminlogin')
   }else{
-   
+    
     res.render('admin/adminhome',)
+    
   }
+ 
 });
 router.get('/adminlogin',(req,res)=>{
   res.render('admin/adminlogin')
@@ -47,7 +54,10 @@ router.get('/adminlogin',(req,res)=>{
 router.post('/adminlogin', function(req, res, next) {
   
   if(req.body.email== ADMINMAIL && req.body.password== ADMINPASSWORD){
+   
+    
     req.session.adminLoggedIn=true
+    // console.log(req.session);
     res.render('admin/adminhome')
   }else{
     wrongpassword="invalid user name or password"
@@ -57,8 +67,7 @@ router.post('/adminlogin', function(req, res, next) {
  
 });
 router.get('/adminlogout', (req, res) => {
-  console.log("hi");
-  // req.session.user = null
+  
   req.session.adminLoggedIn = false
   res.redirect('/admin/adminlogin')
 })

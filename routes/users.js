@@ -138,17 +138,19 @@ router.post('/change-product-quantity', verifyLogin, (req, res, next) => {
   })
 })
 router.get('/place-order', verifyLogin, async (req, res) => {
+  userId=req.session.user._id;
   req.session.coupen = false;
+  let alladdress =await userHelpers.getAllAddress(userId)
   let total = await userHelpers.getTotalAmount(req.session.user._id)
   couponHelpers.getAllCoupon().then((coupons) => {
-    res.render('user/checkout', { total, user: req.session.user, coupons })
+    res.render('user/checkout', { total, user: req.session.user, coupons,alladdress })
   })
 })
 router.post('/place-order', verifyLogin, async (req, res) => {
 
   let products = await userHelpers.getCartProductList(req.body.userId)
   let totalPrice = await userHelpers.getTotalAmount(req.body.userId)
-  console.log(req.session.coupen, 'vava');
+  
   id = req.session.user._id;
   discount = req.session.coupen.discount
   coupenId = req.session.coupen._id
@@ -182,7 +184,8 @@ router.get('/orders', verifyLogin, async (req, res) => {
   res.render('user/orders', { user: req.session.user, orders })
 })
 router.get('/view-order-products/:id', verifyLogin, async (req, res) => {
-  let products = await userHelpers.getOrderProducts(req.params._id)
+  let products = await userHelpers.getOrderProducts(req.params.id)
+  // console.log('ghghhghghhghghhgghghppppppppppppppppppp',products);
 
   res.render('user/view-order-products', { user: req.session.user, products })
 })
@@ -195,20 +198,20 @@ router.get('/product-details/:id', async (req, res) => {
   res.render('user/product-details', { product })
 })
 router.post('/verify-payment', verifyLogin, (req, res) => {
-  console.log(req.body);
+ 
   userHelpers.verifyPayment(req.body).then(() => {
     userHelpers.changePaymentStatus(req.body['order[receipt]']).then(() => {
       console.log("payment successfull");
       res.json({ status: true })
     })
   }).catch((err) => {
-    console.log(err);
+   
     res.json({ status: false, errMsg: 'payment error' })
   })
 
 })
 router.post("/delete-wish", (req, res, next) => {
-  console.log('jjjjjjjjjjjjj', req.body);
+  
   try {
     pid = req.body.pid;
     id = req.body._id;
@@ -282,9 +285,16 @@ router.post("/checkCoupen", async (req, res, next) => {
   }
 })
 router.get('/add-address',async(req,res)=>{
+  userId=req.session.user._id;
   let user = await userHelpers.getOneuserDetails(req.session.user._id)
+  let alladdress =await userHelpers.getAllAddress(userId)
+  
+  
+  // let products = await userHelpers.getOrderProducts(req.params.id)
+  
+  
 
-  res.render('user/userAddress',{user})
+  res.render('user/userAddress',{user,alladdress})
 
 })
 router.post('/edit-user/:id', (req, res, next) => {
@@ -306,13 +316,22 @@ userHelpers.addAddress(userId,addressData).then(()=>{
   })
   
 });
-router.get('',(req,res)=>{
-  userHelpers.orderShipped(req.body['order[receipt]']).then(() => {
+router.get('/editAddress/:id', (req,res,next)=>{
+  try {
+    userId = req.session.user._id
+    addressId = req.params.id
+    console.log('ididididiid',addressId);
 
-    
-  })
+    // let editAddress = await userHelpers.editUserAddress(userId, req.body, addressId)
+    res.render('user/editAddress')
 
+  } catch (error) {
+    next(error)
+  }
 })
+
+
+
 
 
   

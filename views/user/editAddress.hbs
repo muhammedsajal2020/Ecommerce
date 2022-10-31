@@ -15,14 +15,14 @@
         rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="user/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="user/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="user/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="user/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="user/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="user/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="user/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="user/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/style.css" type="text/css">
 </head>
 
 <body>
@@ -45,7 +45,7 @@
                 </a></li>
         </ul>
         <div class="offcanvas__logo">
-            <a href="./"><img src="user/img/logo.png" alt=""></a>
+            <a href="./"><img src="/user/img/logo.png" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
                     <div class="header__logo">
-                        <a href="./"><img src="user/img/logo.png" alt=""></a>
+                        <a href="./"><img src="/user/img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-7">
@@ -112,30 +112,14 @@
         </div>
     </header>
     <!-- Header Section End -->
-
-    <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <span>Add address</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
-
-    <section class="contact spad">
+ <section class="contact spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="contact__content">
                      
                         <div class="contact__form">
-                            <h5>Add address</h5>
+                            <h5>Edit address</h5>
                             <form action="/addAddress/{{user._id}}" method="post">
                                
                                  <label class="form-label" for="form1Example13">Address</label>
@@ -149,51 +133,31 @@
                                  <label class="form-label" for="form1Example13">Postcode</label>
                                 <input type="text" name="postcode" placeholder="Postcode" value="" required="">
                                  
-                               <button type="submit"  class="btn btn-dark col-md-4 text-center">Add</button>
+                               <button type="submit"  class="btn btn-dark col-md-4 text-center">Save</button>
                             </form>
                             
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                   <div class="card" style="width: 14rem;">
-  {{!-- <img src="..." class="card-img-top" alt="..."> --}}
-  {{#each alladdress}}
-  <div class="card-body">
-    <form action="">
-    <h4  class="card-title">{{this.address1}}</h4>
-    <h5 class="card-title">{{this.towncity}} </h5>
-    <h5 class="card-title">{{this.state}} </h5>
-    <h5 class="card-title">{{this.district}} </h5>
-    <h5 class="card-title">{{this.postcode}} </h5>
-   
-   
-    <a href="/editAddress/{{this._id}}" class="btn btn-primary">Edit</a>
-    <a href="#" class="btn btn-danger">Delete</a>
-     </form>
-  </div>
-    {{/each}}
- 
-</div>
-
-                </div>
-               
+                
              
         </div>
     </div>
 </section>
 
+
+    
     <!-- Js Plugins -->
-    <script src="user/js/jquery-3.3.1.min.js"></script>
-    <script src="user/js/bootstrap.min.js"></script>
-    <script src="user/js/jquery.magnific-popup.min.js"></script>
-    <script src="user/js/jquery-ui.min.js"></script>
-    <script src="user/js/mixitup.min.js"></script>
-    <script src="user/js/jquery.countdown.min.js"></script>
-    <script src="user/js/jquery.slicknav.js"></script>
-    <script src="user/js/owl.carousel.min.js"></script>
-    <script src="user/js/jquery.nicescroll.min.js"></script>
-    <script src="user/js/main.js"></script>
+    <script src="/user/js/jquery-3.3.1.min.js"></script>
+    <script src="/user/js/bootstrap.min.js"></script>
+    <script src="/user/js/jquery.magnific-popup.min.js"></script>
+    <script src="/user/js/jquery-ui.min.js"></script>
+    <script src="/user/js/mixitup.min.js"></script>
+    <script src="/user/js/jquery.countdown.min.js"></script>
+    <script src="/user/js/jquery.slicknav.js"></script>
+    <script src="/user/js/owl.carousel.min.js"></script>
+    <script src="/user/js/jquery.nicescroll.min.js"></script>
+    <script src="/user/js/main.js"></script>
 </body>
 
 </html>
